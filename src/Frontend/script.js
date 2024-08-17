@@ -35,7 +35,7 @@ let outsideInput = true;
 let lyrics;
 
 function whenInputClicked() {
-    if(input.value == "Enter some song lyrics!"){
+    if(input.value == "Enter some lyrics!"){
         input.value = "";
     }
     outsideInput = false;
@@ -48,7 +48,7 @@ function whenInputClicked() {
 
 function whenEnterOrClickOutside(){
     if(input.value == ""){
-        input.value = "Enter some song lyrics!";
+        input.value = "Enter some lyrics!";
     }
 }
 
@@ -63,7 +63,7 @@ function handleEnter(event){
 
 content.appendChild(input);
 input.classList.add("input", "text");
-input.value = "Enter some song lyrics!";
+input.value = "Enter some lyrics!";
 input.addEventListener("click", () => {
     whenInputClicked();
 })
@@ -72,7 +72,7 @@ input.addEventListener("mouseleave", () => {
     outsideInput = true;
     document.addEventListener("click", () => {
         if(outsideInput == true){
-            if(input.value != "Enter some song lyrics!"){
+            if(input.value != "Enter some lyrics!"){
                 lyrics = input.value;
             }
         }
