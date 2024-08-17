@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.music.demo.Entites.Song;
+import com.music.demo.Entites.User;
 import com.music.demo.Repositories.SongRepository;
+import com.music.demo.Repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PublicService {
     private final SongRepository songs;
+    private final UserRepository users;
 
     public List<Song> allSongs(){
         return songs.findAll();
@@ -22,5 +25,24 @@ public class PublicService {
     }
     public boolean existsByTitleAndArtist(Song song){
         return songs.existsByTitleAndArtist(song.getTitle(), song.getArtist());
+    }
+
+    public List<User> allUsers(){
+        return users.findAll();
+    }
+    public void saveUser(User user){
+        users.save(user);
+    }
+    public boolean existsByUsername(String username){
+        return users.existsByUsername(username);
+    }
+    public User findUserUsername(String username){
+        return users.findByUsername(username);
+    }
+    public boolean existsByEmail(String email){
+        return users.existsByEmail(email);
+    }
+    public User findUserEmail(String email){
+        return users.findByEmail(email);
     }
 }

@@ -1,31 +1,28 @@
-/*async function getSong(lyric){
-    let url = 'http://127.0.0.1:8000/api/find-songs';
-    let tags = lyric.split(',').map(tag => tag.trim());
-
-    let payload = {
-        lyrics: lyric
-    }
+async function getSong(lyric) {
+    let url = 'http://127.0.0.1:8000/api/find-songs';  //need to change during production
 
     try {
         let response = await fetch(url, {
-            method: 'GET',
-            headers:{
+            method: 'POST',
+            headers: {
                 'Content-Type': 'application/json',
             },
-            params: { tag: tags.join(',') }
+            body: JSON.stringify(payload)
         });
     
-        if(!response.ok){
-          throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         let data = await response.json();
         console.log('Found songs:', data);
+        return data;
     } catch (error) {
         console.error('Error:', error);
     }
 }
-
-getSong('dark, dark nights and violent things');*/
+getSong('dark dark nights and violent things').then(data => {
+    console.log('Test result:', data);
+});
 
 let content = document.querySelector(".content");
 
@@ -75,7 +72,9 @@ input.addEventListener("mouseleave", () => {
     outsideInput = true;
     document.addEventListener("click", () => {
         if(outsideInput == true){
-            lyrics = input.value;
+            if(input.value != "Enter some song lyrics!"){
+                lyrics = input.value;
+            }
         }
     })
     whenEnterOrClickOutside;
