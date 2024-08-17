@@ -1,4 +1,4 @@
-/*async function getSong(lyric){
+async function getSong(lyric){
     let url = 'http://127.0.0.1:8000/api/find-songs';
     let tags = lyric.split(',').map(tag => tag.trim());
 
@@ -25,7 +25,7 @@
     }
 }
 
-getSong('dark, dark nights and violent things');*/
+getSong('dark, dark nights and violent things');
 
 let content = document.querySelector(".content");
 
@@ -75,7 +75,9 @@ input.addEventListener("mouseleave", () => {
     outsideInput = true;
     document.addEventListener("click", () => {
         if(outsideInput == true){
-            lyrics = input.value;
+            if(input.value != "Enter some song lyrics!"){
+                lyrics = input.value;
+            }
         }
     })
     whenEnterOrClickOutside;

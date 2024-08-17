@@ -1,5 +1,5 @@
 .content{
-    width: 1350px;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
