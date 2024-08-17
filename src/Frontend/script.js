@@ -1,19 +1,24 @@
 async function getSong(lyric) {
-    let url = 'http://127.0.0.1:8000/api/find-songs';  // Use your Vercel URL in production
+    let url = 'http://127.0.0.1:8000';
+
+    let payload = {
+        lyrics: lyric
+    };
 
     try {
-        let response = await fetch(`${url}?lyrics=${encodeURIComponent(lyric)}`, {
-            method: 'GET',
+        let response = await fetch(url, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify(payload)
         });
     
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         let data = await response.json();
-        console.log('Server response:', data);
+        console.log('Found songs:', data);
         return data;
     } catch (error) {
         console.error('Error:', error);

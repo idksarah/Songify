@@ -1,11 +1,11 @@
 .content{
-    width: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
+    width: 75vw;
+    margin-bottom: 50px;
 }
 
 .text {
@@ -14,28 +14,30 @@
 }
 
 .title{
-    font-size: 170px;
+    font-size: 20vh;
     color: rgb(36, 36, 36);
 }
 
 body {
     background-color: rgb(255, 249, 249);
+    overflow-x: hidden;
+    margin: 0;
 }
 
 .input {
     background-color: transparent;
     border: none;
-    font-size: 40px;
-    padding: 15px;
+    font-size: 2em;
+    padding: 1em;
     width: min-content;
     display: inline-block;
     color: rgb(157, 157, 157);
     overflow: hidden;
-    margin-top: -20px;
     box-shadow: none;
     outline: none;
     cursor: pointer;
-    border-bottom: 2px solid rgb(36, 36, 36)
+    border-bottom: 2px solid rgb(36, 36, 36);
+    margin-top: -8vh;
 }
 
 .hidden{
@@ -43,7 +45,7 @@ body {
 }
 
 .footer {
-    position: fixed;
+    position: static;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -54,34 +56,38 @@ body {
     justify-content: center;
     display: flex;
     flex-direction: row;
-    height: 80px;
+    height: 50px;
+    left:0;
+    right:0;
+    bottom:0;
   }
 
 .songifyBottomText {
-    font-size: 25px;
+    font-size: 1em;
 }
 
 .songifyFooter {
     display: flex; 
     flex-direction: row;
-    padding: 20px;
+    padding: 2vh;
     color: rgb(228, 226, 226);
     margin-right: auto;
+    padding-left: 3em;
 }
 
 #songify {
-    font-size: 35px;
-    margin: 20px;
+    font-size: 2em;
+    margin: .5em;
 }
 
 #songifyDesc{
-    margin-top: 30px;
-    font-size: 18px;
+    margin-top: 27px;
+    font-size: 1em;
 }
 
 #musicFinder{
-    font-size: 18px;
+    font-size: 1em;
     font-family: 'Roboto';
     color: rgb(228, 226, 226);
-    padding-right: 40px;
+    padding-right: 3em;
 }
