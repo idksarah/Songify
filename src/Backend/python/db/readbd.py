@@ -7,3 +7,11 @@ def getSongs():
         return -1
 
     return request.json()
+
+def getAccounts():
+    request = requests.get('http://127.0.0.1:8082/api/v1/passwords')
+
+    if not request.status_code == 200:
+        return -1
+
+    return request.json()

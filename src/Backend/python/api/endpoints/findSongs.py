@@ -1,5 +1,5 @@
 import json
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from core.config import tags
 from db import readbd
 
@@ -14,6 +14,9 @@ async def findSongs(tag:tags):
     #get song list
     songs = readbd.getSongs()
 
+    if songs == -1:
+        raise HTTPException(status_code=500, detail="Database is down")
+    
     matchingSongsTitles = []
     for song in songs:
         if song["title"] in tag.tags:
