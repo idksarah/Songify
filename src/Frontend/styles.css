@@ -1,5 +1,5 @@
 .content{
-    width: fit-content;
+    width: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,4 +40,53 @@ body {
 
 .hidden{
     display: none;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(36, 36, 36);
+    color: white;
+    text-align: center;
+    align-items: baseline;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+.songifyBottomText {
+    font-size: 25px;
+}
+
+.copyrightBottomText {
+
+}
+
+.songifyFooter {
+    display: flex; 
+    flex-direction: row;
+    padding: 20px;
+    color: rgb(228, 226, 226);
+    margin-top: 5px;
+    margin-right: auto;
+}
+
+#songify {
+    font-size: 35px;
+    margin: 20px;
+}
+
+#songifyDesc{
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+#musicFinder{
+    font-size: 18px;
+    font-family: 'Roboto';
+    color: rgb(228, 226, 226);
+    padding-right: 40px;
+    margin-bottom: 60px;
 }

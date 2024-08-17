@@ -1,18 +1,19 @@
 async function getSong(lyric){
+    console.log("r u even running");
     let url = 'http://127.0.0.1:8000/api/find-songs';
-    let tags = lyric.split(',').map(tag => tag.trim());
 
     let payload = {
         lyrics: lyric
     }
 
     try {
+        console.log("i am running!");
         let response = await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
             },
-            params: { tag: tags.join(',') }
+            body: JSON.stringify(payload)
         });
     
         if(!response.ok){
@@ -20,6 +21,7 @@ async function getSong(lyric){
         }
         let data = await response.json();
         console.log('Found songs:', data);
+        console.log("uh huh");
     } catch (error) {
         console.error('Error:', error);
     }
