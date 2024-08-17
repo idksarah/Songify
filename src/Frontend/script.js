@@ -1,13 +1,10 @@
 async function getSong(lyric) {
-    let url = 'http://127.0.0.1:8000/api/find-songs';  //need to change during production
+    let queryParam = encodeURIComponent(lyric);
+    let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
 
     try {
         let response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
+            method: 'GET'
         });
     
         if (!response.ok) {
@@ -20,9 +17,11 @@ async function getSong(lyric) {
         console.error('Error:', error);
     }
 }
+
 getSong('dark dark nights and violent things').then(data => {
     console.log('Test result:', data);
 });
+
 
 let content = document.querySelector(".content");
 
