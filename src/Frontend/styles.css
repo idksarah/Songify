@@ -50,18 +50,15 @@ body {
     background-color: rgb(36, 36, 36);
     color: white;
     text-align: center;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: row;
+    height: 80px;
   }
 
 .songifyBottomText {
     font-size: 25px;
-}
-
-.copyrightBottomText {
-
 }
 
 .songifyFooter {
@@ -69,7 +66,6 @@ body {
     flex-direction: row;
     padding: 20px;
     color: rgb(228, 226, 226);
-    margin-top: 5px;
     margin-right: auto;
 }
 
@@ -88,5 +84,4 @@ body {
     font-family: 'Roboto';
     color: rgb(228, 226, 226);
     padding-right: 40px;
-    margin-bottom: 60px;
 }
