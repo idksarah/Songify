@@ -5,6 +5,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px;
 }
 
 .text {
@@ -13,26 +14,28 @@
 }
 
 .title{
-    font-size: 150px;
+    font-size: 170px;
     color: rgb(36, 36, 36);
 }
 
-.prompt {
-    font-size: 40px;
-    color: rgb(157, 157, 157);
-    cursor: pointer;
-}
 body {
-    background-color: rgb(255, 249, 255);
+    background-color: rgb(255, 249, 249);
 }
 
 .input {
-    background-color: rgb(242, 237, 242);
+    background-color: transparent;
     border: none;
     font-size: 40px;
     padding: 15px;
-    border-radius: 15px;
     width: min-content;
+    display: inline-block;
+    color: rgb(157, 157, 157);
+    overflow: hidden;
+    margin-top: -20px;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    border-bottom: 2px solid rgb(36, 36, 36)
 }
 
 .hidden{

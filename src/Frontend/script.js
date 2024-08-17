@@ -29,34 +29,58 @@ getSong('dark, dark nights and violent things');*/
 
 let content = document.querySelector(".content");
 
-let prompt = document.querySelector(".prompt");
-
 let input = document.createElement("textarea");
-input.classList.add("input", "text", "prompt");
+input.setAttribute("wrap", "soft")
+input.setAttribute("cols", "38");
+input.classList.add("input", "text");
+let outsideInput = true;
 
 let lyrics;
 
-/*function whenPromptClicked() {
-    if(input.textContent == undefined){
-        input.textContent = "Type a song lyric!" //maybe rotate through random lyrics
+function whenInputClicked() {
+    if(input.value == "Enter some song lyrics!"){
+        input.value = "";
     }
-}*/
-
-function replacePromptWithInput() {
-    content.appendChild(input);
-    prompt.classList.add("hidden");
+    outsideInput = false;
+    document.addEventListener("click", () => {
+        if(outsideInput == true){
+            whenEnterOrClickOutside();
+        }
+    })
 }
 
-prompt.addEventListener("click", () => {
-    replacePromptWithInput();
-    /*whenClickOnInput();
+function whenEnterOrClickOutside(){
+    if(input.value == ""){
+        input.value = "Enter some song lyrics!";
+    }
+}
 
-    input.addEventListener("blur", saveText);
-    input.addEventListener("keypress", () => {
-        if (key === "Enter") {
-            saveText();
-        }
-    });
+function handleEnter(event){
+    if (event.key === "Enter") {
+        event.preventDefault();
+        input.blur();
+        lyrics = input.value;
+        whenEnterOrClickOutside();
+    }
+}
 
-    input.textContent*/
+content.appendChild(input);
+input.classList.add("input", "text");
+input.value = "Enter some song lyrics!";
+input.addEventListener("click", () => {
+    whenInputClicked();
 })
+
+input.addEventListener("mouseleave", () => {
+    outsideInput = true;
+    document.addEventListener("click", () => {
+        if(outsideInput == true){
+            lyrics = input.value;
+        }
+    })
+    whenEnterOrClickOutside;
+});
+
+input.addEventListener("keypress", (event) => {
+    handleEnter(event);
+});
