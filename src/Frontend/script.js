@@ -1,9 +1,5 @@
 async function getSong(lyric) {
-    let url = 'http://127.0.0.1:8000';
-
-    let payload = {
-        lyrics: lyric
-    };
+    let url = 'http://127.0.0.1:8000/api/find-songs';  //need to change during production
 
     try {
         let response = await fetch(url, {
