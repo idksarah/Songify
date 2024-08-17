@@ -1,22 +1,23 @@
 import json
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from core.config import tags
 from db import readbd
+from typing import List
+from pydantic import BaseModel
 
 router = APIRouter()
 
+class songResponse(BaseModel):
+    title: List[str]
 
 #finding all songs matching tags
 #Todo: Does this shit work? Note, It dosn't.
-@router.get("/find-songs")
-async def findSongs(tag:tags):
+@router.get("/find-songs", response_model=songResponse)
+async def findSongs(tag:str):
 
     #get song list
     songs = readbd.getSongs()
 
-    if songs == -1:
-        raise HTTPException(status_code=500, detail="Database is down")
-    
     matchingSongsTitles = []
     for song in songs:
         if song["title"] in tag.tags:
@@ -27,4 +28,4 @@ async def findSongs(tag:tags):
 
     matchingSongs = {"title": matchingSongsTitles}
     
-    return json.dumps(matchingSongs, indent=4)
+     return {"title": matchingSongsTitles}
