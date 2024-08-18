@@ -7,6 +7,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:5500",
+    "https://idksarah.github.io/nanocats-peddie/"
 ]
 
 app.add_middleware(
