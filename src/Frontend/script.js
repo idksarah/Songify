@@ -1,28 +1,18 @@
-async function getSong(input) {
-    let queryParam = encodeURIComponent(JSON.stringify(input));
-    console.log(queryParam)
-    let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
-    console.log(url);
-
-    try {
-        let response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify({
-                "sessionID": "killme",
-                "tags": ["help"]})
-        });
-        let data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 let test = {
     "sessionID": "killme",
     "tags": ["help"]
 };
+
+fetch('0.0.0.0:7300/api/find-songs', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(test)
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch((error) => console.error('Error:', error));
 
 //
 
