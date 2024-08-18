@@ -5,6 +5,7 @@ from db import readbd
 
 router = APIRouter()
 
+
 #finding all songs matching tags
 #Todo: Does this shit work? Note, It dosn't.
 @router.get("/find-songs")
@@ -15,7 +16,7 @@ async def findSongs(tag:tags):
 
     if songs == -1:
         raise HTTPException(status_code=500, detail="Database is down")
-
+    
     matchingSongsTitles = []
     for song in songs:
         if song["title"] in tag.tags:
@@ -26,4 +27,4 @@ async def findSongs(tag:tags):
 
     matchingSongs = {"title": matchingSongsTitles}
     
-     return json.dumps(matchingSongs, indent=4)
+    return json.dumps(matchingSongs, indent=4)
