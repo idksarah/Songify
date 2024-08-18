@@ -140,8 +140,22 @@ function checkIfUserInputText(){
         songContainer.classList.add("songContainer");
         songContent.append(songContainer);
 
+        let streamingContainer = document.createElement("div");
+        streamingContainer.classList.add("streamingContainer");
+        songContent.append(streamingContainer);
+        
+        /*let spotify = document.createElement("img");
+        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+        spotify.classList.add("spotify", "icon");
+        streamingContainer.append(spotify);
+
+        let itunes = document.createElement("img");
+        itunes.src = "https://static.vecteezy.com/system/resources/previews/046/437/292/non_2x/itunes-music-icon-free-png.png";
+        itunes.classList.add("itunes", "icon");
+        streamingContainer.append(itunes);*/
+
         let DOMsongCover = document.createElement("img");
-        DOMsongCover.src = "./../../small_cuts.jpg"
+        DOMsongCover.src = "https://images.genius.com/3e7e4a945f18d67189bbb5a603a3e21a.600x600x1.jpg"
         DOMsongCover.classList.add("songCover");
         songContainer.appendChild(DOMsongCover);
 

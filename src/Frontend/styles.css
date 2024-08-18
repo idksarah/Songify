@@ -22,7 +22,7 @@ body {
     background-color: rgb(255, 249, 249);
     overflow-x: hidden;
     margin: 0;
-    background-image: url("./../../noise.avif");
+    background-image: url("./imgs/noise.avif");
 }
 
 html, body, content {
@@ -99,11 +99,12 @@ html, body, content {
 }
 
 .songContainer{
-    background-color: rgba(247, 247, 247, 1);
+    background-color: rgba(247, 247, 247, .65);
     height: fit-content;
     width: 45vh;
     border-radius: 10px;
     padding: 3em;
+    padding-top: 6em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,7 +112,7 @@ html, body, content {
 }
 
 .songCover{
-    width: 40em;
+    width: 30em;
     height: auto;
     opacity: .95;
     border-radius: 10px;
@@ -119,18 +120,18 @@ html, body, content {
 
 .song {
     font-size: 3.5em;
-    color: rgba(253, 162, 59, 0.98);
+    color: rgba(253, 162, 59, 0.95);
 }
 
 .songLyrics {
-    color: rgba(75, 75, 75, .6);
-    font-size: 1.6em;
+    color: rgba(75, 75, 75, .55);
+    font-size: 1.3em;
 }
 
 .songArtist {
     margin-top: -1em;
     font-size: 2em;
-    color: rgba(75, 75, 75, .85);
+    color: rgba(75, 75, 75, .75);
 }
 
 .yellowText{
@@ -145,4 +146,14 @@ html, body, content {
     margin-right: auto;
     width: 75vw;
     margin-bottom: 50px;
+}
+
+.spotify {
+    width: 3em;
+    height: auto;
+}
+
+.itunes {
+    width: 6em;
+    height: auto;
 }
