@@ -1,5 +1,8 @@
-async function getSong(tagObject) {
-    let queryParam = encodeURIComponent(JSON.stringify(tagObject));
+async function getSong(input) {
+    let queryParam = encodeURIComponent(JSON.stringify({
+        //"sessionID": "killMe",
+        "tags": [input]
+    }));
     let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
 
     try {
@@ -23,7 +26,6 @@ let title = document.querySelector(".title");
 
 let input = document.createElement("textarea");
 input.setAttribute("wrap", "soft")
-input.setAttribute("cols", "38");
 input.classList.add("input", "text");
 let outsideInput = true;
 
