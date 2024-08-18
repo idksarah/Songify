@@ -1,0 +1,172 @@
+async function getSong(tagObject) {
+    let queryParam = encodeURIComponent(JSON.stringify(tagObject));
+    let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
+
+document.getElementById('loadingScreen').classList.remove('hidden');
+
+    try {
+        let response = await fetch(url, {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        let data = await response.json();
+        console.log('Found songs:', data);
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        document.getElementById('loadingScreen').classList.add('hidden');
+    }
+}
+
+let content = document.querySelector(".content");
+let title = document.querySelector(".title");
+
+let input = document.createElement("textarea");
+input.setAttribute("wrap", "soft")
+input.setAttribute("cols", "38");
+input.classList.add("input", "text");
+let outsideInput = true;
+
+let lyrics;
+
+function whenInputClicked() {
+    if(input.value == "Enter some lyrics!"){
+        input.value = "";
+    }
+    outsideInput = false;
+    content.addEventListener("click", () => {
+        if(outsideInput == true){
+            whenEnterOrClickOutside();
+        }
+    })
+}
+
+function whenEnterOrClickOutside(){
+    if(input.value == ""){
+        input.classList.remove("yellowText");
+        input.value = "Enter some lyrics!";
+    }
+}
+
+function handleEnter(event){
+    if (event.key === "Enter") {
+        event.preventDefault();
+        if(input.value == "Enter some lyrics!" || input.value == ""){
+            input.classList.remove("yellowText");
+        } else {
+            input.blur();
+            lyrics = input.value;
+            checkIfUserInputText()
+            whenEnterOrClickOutside();
+        }
+    }
+}
+
+content.appendChild(input);
+input.classList.add("input", "text");
+input.value = "Enter some lyrics!";
+input.addEventListener("click", () => {
+    input.classList.add("yellowText");
+    whenInputClicked();
+})
+
+input.addEventListener("mouseleave", () => {
+    outsideInput = true;
+    document.addEventListener("click", () => {
+        if(outsideInput == true){
+            if(input.value != "Enter some lyrics!"){
+                lyrics = input.value;
+                input.blur();
+                checkIfUserInputText()
+            }
+        }
+    })
+    whenEnterOrClickOutside;
+});
+
+input.addEventListener("keypress", (event) => {
+    handleEnter(event);
+});
+
+let songContent = document.querySelector(".songContent");
+let song, songArtist, songCover, songLyrics; //assuming only one song is returned
+song = "Don't Like You Anymore";
+songArtist = "Dallon Weekes"
+songLyrics = `[Verse 1]
+Well, I used to have a pretty face
+And it used to be so commonplace
+That I’d always get what I want
+And you’d always get what you want
+
+[Chorus]
+And I don’t like you anymore
+And I don’t like you anymore
+But why not?
+But why not?
+
+[Verse 2]
+Oh, don’t you think it's swell
+Oh, you look so fancy but I can tell
+You’re not getting on with your life
+You’re not getting on with your life
+
+[Chorus]
+And I don’t like you anymore
+And I don’t like you anymore
+So just cut yourself with a knife
+Just cut yourself with a knife
+
+[Bridge]
+If you don’t love me anymore
+I think I’ll kill myself
+Because I’m sure as sure can be
+There is nobody else for you but me
+If you don’t love me anymore
+I think I’ll kill myself
+Because I’m sure as sure can be
+There is nobody else for you but me
+
+[Verse 3]
+Well, I used to have a pretty face
+And it used to be so commonplace
+That I’d always get what I want
+And you’d always get what you want`;
+
+function checkIfUserInputText(){
+    if(lyrics != undefined || lyrics != "" || lyrics != "Enter some lyrics!"){
+        title.classList.add("hidden");
+        input.classList.add("hidden");
+
+        let songContainer = document.createElement("div");
+        songContainer.classList.add("songContainer");
+        songContent.append(songContainer);
+
+        let DOMsongCover = document.createElement("img");
+        DOMsongCover.src = "./../../small_cuts.jpg"
+        DOMsongCover.classList.add("songCover");
+        songContainer.appendChild(DOMsongCover);
+
+        DOMsong = document.createElement("p");
+        DOMsong.textContent = song;
+        DOMsong.classList.add("text", "song");
+        songContainer.appendChild(DOMsong);
+
+        DOMsongArtist = document.createElement("p");
+        DOMsongArtist.textContent = songArtist;
+        DOMsongArtist.classList.add("text", "songArtist");
+        songContainer.appendChild(DOMsongArtist);
+
+        DOMsongLyrics = document.createElement("p");
+        DOMsongLyrics.textContent = songLyrics;
+        DOMsongLyrics.classList.add("text", "songLyrics");
+        songContainer.appendChild(DOMsongLyrics);
+    }
+}
