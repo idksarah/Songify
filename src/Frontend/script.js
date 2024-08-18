@@ -34,7 +34,7 @@ function whenInputClicked() {
         input.value = "";
     }
     outsideInput = false;
-    document.addEventListener("click", () => {
+    content.addEventListener("click", () => {
         if(outsideInput == true){
             whenEnterOrClickOutside();
         }
@@ -88,6 +88,7 @@ input.addEventListener("keypress", (event) => {
     handleEnter(event);
 });
 
+let songContent = document.querySelector(".songContent");
 let song, songArtist, songCover, songLyrics; //assuming only one song is returned
 song = "Don't Like You Anymore";
 songArtist = "Dallon Weekes"
@@ -138,7 +139,7 @@ function checkIfUserInputText(){
 
         let songContainer = document.createElement("div");
         songContainer.classList.add("songContainer");
-        content.append(songContainer);
+        songContent.append(songContainer);
 
         let DOMsongCover = document.createElement("img");
         DOMsongCover.src = "./../../small_cuts.jpg"
