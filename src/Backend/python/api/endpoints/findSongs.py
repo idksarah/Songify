@@ -1,17 +1,21 @@
 import json
 from fastapi import APIRouter, HTTPException
-from core.config import tags
+from pydantic import BaseModel
+from typing import List
 from core.security import cheakSessionID
 from db import readbd
 
 router = APIRouter()
 
+class TagRequest(BaseModel):
+    sessionID: str
+    tags: List[str]
+
 
 #finding all songs matching tags
 #Todo: Does this shit work? Note, It dosn't.
 @router.post("/find-songs")
-async def findSongs(tag:tags):
-
+async def findSongs(tag: TagRequest):
     if not cheakSessionID(tag.sessionID):
         raise HTTPException(status_code=500, detail="Invalid Session")
     
@@ -31,4 +35,4 @@ async def findSongs(tag:tags):
 
     matchingSongs = {"title": matchingSongsTitles}
     
-    return tag.dict()
+    return matchingSongs
