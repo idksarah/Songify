@@ -20,6 +20,8 @@ services:
       SERVER_PORT: 8082
     depends_on:
       - db
+    volumes:
+      - ./csv:/app/csv 
 
   webapp:
     build: ./python
