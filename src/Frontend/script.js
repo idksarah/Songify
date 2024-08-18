@@ -1,25 +1,22 @@
 async function getSong(input) {
-    let queryParam = encodeURIComponent(JSON.stringify({
-        //"sessionID": "killMe",
-        "tags": [input]
-    }));
-    let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
+    let url = `http://127.0.0.1:8000/api/find-songs?tag=${input}`;
 
     try {
         let response = await fetch(url, {
             method: 'GET'
         });
-    
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
         let data = await response.json();
-        console.log('Found songs:', data);
+        console.log(data);
         return data;
     } catch (error) {
-        console.error('Error:', error);
+        console.error(error);
     }
 }
+
+let test = {
+    sessionID: "killme",
+    tags: ["idkhow"]
+};
 
 let content = document.querySelector(".content");
 let title = document.querySelector(".title");
