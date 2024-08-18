@@ -21,14 +21,12 @@ async def findSongs(tag:tags):
     if songs == -1:
         raise HTTPException(status_code=500, detail="Database is down")
     
-    matchingSongsTitles = []
+    matchingSongs = []
     for song in songs:
         if song["title"] in tag.tags:
-            matchingSongsTitles.append(song["title"])
+            matchingSongs.append(song)
             
         elif song["artist"] in tag.tags:
-            matchingSongsTitles.append(song["title"])
-
-    matchingSongs = {"title": matchingSongsTitles}
+            matchingSongs.append(song)
     
     return json.dumps(matchingSongs, indent=4)
