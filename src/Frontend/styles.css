@@ -24,6 +24,10 @@ body {
     margin: 0;
 }
 
+html, body, content {
+    min-height: 100%;
+}
+
 .input {
     background-color: transparent;
     border: none;
@@ -45,7 +49,7 @@ body {
 }
 
 .footer {
-    position: static;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -60,6 +64,7 @@ body {
     left:0;
     right:0;
     bottom:0;
+    margin-top: 5em;;
   }
 
 .songifyBottomText {
