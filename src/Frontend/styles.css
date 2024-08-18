@@ -22,6 +22,11 @@ body {
     background-color: rgb(255, 249, 249);
     overflow-x: hidden;
     margin: 0;
+    background-image: url("./../../noise.avif");
+}
+
+html, body, content {
+    min-height: 100%;
 }
 
 .input {
@@ -31,7 +36,7 @@ body {
     padding: 1em;
     width: min-content;
     display: inline-block;
-    color: rgb(157, 157, 157);
+    color: rgb(116, 116, 116);
     overflow: hidden;
     box-shadow: none;
     outline: none;
@@ -45,7 +50,7 @@ body {
 }
 
 .footer {
-    position: static;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -60,6 +65,7 @@ body {
     left:0;
     right:0;
     bottom:0;
+    margin-top: 5em;;
   }
 
 .songifyBottomText {
@@ -70,7 +76,7 @@ body {
     display: flex; 
     flex-direction: row;
     padding: 2vh;
-    color: rgb(228, 226, 226);
+    color: rgb(253, 162, 59);
     margin-right: auto;
     padding-left: 3em;
 }
@@ -88,6 +94,55 @@ body {
 #musicFinder{
     font-size: 1em;
     font-family: 'Roboto';
-    color: rgb(228, 226, 226);
+    color: rgb(253, 162, 59);
     padding-right: 3em;
+}
+
+.songContainer{
+    background-color: rgba(247, 247, 247, 1);
+    height: fit-content;
+    width: 45vh;
+    border-radius: 10px;
+    padding: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8vh;
+}
+
+.songCover{
+    width: 40em;
+    height: auto;
+    opacity: .95;
+    border-radius: 10px;
+}
+
+.song {
+    font-size: 3.5em;
+    color: rgba(253, 162, 59, 0.98);
+}
+
+.songLyrics {
+    color: rgba(75, 75, 75, .6);
+    font-size: 1.6em;
+}
+
+.songArtist {
+    margin-top: -1em;
+    font-size: 2em;
+    color: rgba(75, 75, 75, .85);
+}
+
+.yellowText{
+    color: rgb(253, 162, 59);
+}
+
+.songContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75vw;
+    margin-bottom: 50px;
 }
