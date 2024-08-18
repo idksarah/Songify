@@ -20,3 +20,11 @@ services:
       SERVER_PORT: 8082
     depends_on:
       - db
+
+  webapp:
+    build: ./python
+    ports:
+      - "7300:7300"
+    depends_on:
+      - db
+      - app
