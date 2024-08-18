@@ -1,6 +1,7 @@
 import json
 from fastapi import APIRouter, HTTPException
 from core.config import tags
+from core.security import cheakSessionID
 from db import readbd
 
 router = APIRouter()
@@ -11,6 +12,9 @@ router = APIRouter()
 @router.get("/find-songs")
 async def findSongs(tag:tags):
 
+    if not cheakSessionID(tag.sessionID):
+        raise HTTPException(status_code=500, detail="Invalid Session")
+    
     #get song list
     songs = readbd.getSongs()
 
