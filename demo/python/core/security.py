@@ -47,7 +47,7 @@ def affirmUser(username:str,password:str):
                     new_uuid = str(uuid.uuid4())
                     
                     if all(new_uuid != item[0] for item in currentSession.SessionIDs):
-                        currentSession.SessionIDs.append([new_uuid,25])
+                        currentSession.SessionIDs.append([new_uuid,3600])
                         return new_uuid
     
     #sadly no
