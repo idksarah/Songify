@@ -151,6 +151,7 @@ html, body, content {
 .spotify {
     width: 3em;
     height: auto;
+    margin-bottom: 20px;
 }
 
 .itunes {
