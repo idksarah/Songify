@@ -9,7 +9,7 @@ router = APIRouter()
 
 #finding all songs matching tags
 #Todo: Does this shit work? Note, It dosn't.
-@router.get("/find-songs")
+@router.post("/find-songs")
 async def findSongs(tag:tags):
 
     if not cheakSessionID(tag.sessionID):
@@ -31,4 +31,4 @@ async def findSongs(tag:tags):
 
     matchingSongs = {"title": matchingSongsTitles}
     
-    return json.dumps(matchingSongs, indent=4)
+    return tag.dict()

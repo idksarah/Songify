@@ -1,9 +1,15 @@
 async function getSong(input) {
-    let url = `http://127.0.0.1:8000/api/find-songs?tag=${input}`;
+    let queryParam = encodeURIComponent(JSON.stringify(input));
+    console.log(queryParam)
+    let url = `http://127.0.0.1:8000/api/find-songs?tag=${queryParam}`;
+    console.log(url);
 
     try {
         let response = await fetch(url, {
-            method: 'GET'
+            method: "POST",
+            body: JSON.stringify({
+                "sessionID": "killme",
+                "tags": ["help"]})
         });
         let data = await response.json();
         console.log(data);
@@ -14,9 +20,11 @@ async function getSong(input) {
 }
 
 let test = {
-    sessionID: "killme",
-    tags: ["idkhow"]
+    "sessionID": "killme",
+    "tags": ["help"]
 };
+
+//
 
 let content = document.querySelector(".content");
 let title = document.querySelector(".title");
