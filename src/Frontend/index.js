@@ -133,6 +133,7 @@ input.setAttribute('wrap', 'soft');
 input.classList.add("input", "text");
 var outsideInput = true;
 var lyrics;
+var appIcons = false;
 function whenInputClicked() {
     if (input.value == 'Enter a song/artist name!') {
         input.value = '';
@@ -205,26 +206,28 @@ function checkIfUserInputText() {
             spotifyLink.href = songInfo.songUrl;
             spotifyLink.target = "_blank";
         });
-        //
         title.classList.add("hidden");
         input.classList.add("hidden");
-        songContainer.classList.add("songContainer");
-        songContent.append(songContainer);
-        streamingContainer.classList.add("streamingContainer");
-        songContent.append(streamingContainer);
-        var spotify = document.createElement("img");
-        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
-        spotify.classList.add("spotify", "icon");
-        streamingContainer.append(spotify);
-        var itunes = document.createElement("img"); //convert to a better img
-        itunes.src = "https://static.vecteezy.com/system/resources/previews/046/437/292/non_2x/itunes-music-icon-free-png.png";
-        itunes.classList.add("itunes", "icon");
-        streamingContainer.append(itunes);
-        DOMsongCover.classList.add("songCover");
-        songContainer.appendChild(DOMsongCover);
-        DOMsong.classList.add("text", "song");
-        songContainer.appendChild(DOMsong);
-        DOMsongArtist.classList.add("text", "songArtist");
-        songContainer.appendChild(DOMsongArtist);
+        if (!appIcons) {
+            songContainer.classList.add("songContainer");
+            songContent.append(songContainer);
+            streamingContainer.classList.add("streamingContainer");
+            songContent.append(streamingContainer);
+            var spotify = document.createElement("img");
+            spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+            spotify.classList.add("spotify", "icon");
+            streamingContainer.append(spotify);
+            var itunes = document.createElement("img"); //change to a better img
+            itunes.src = "https://static.vecteezy.com/system/resources/previews/046/437/292/non_2x/itunes-music-icon-free-png.png";
+            itunes.classList.add("itunes", "icon");
+            streamingContainer.append(itunes);
+            DOMsongCover.classList.add("songCover");
+            songContainer.appendChild(DOMsongCover);
+            DOMsong.classList.add("text", "song");
+            songContainer.appendChild(DOMsong);
+            DOMsongArtist.classList.add("text", "songArtist");
+            songContainer.appendChild(DOMsongArtist);
+            appIcons = true;
+        }
     }
 }

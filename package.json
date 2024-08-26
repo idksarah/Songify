@@ -3,6 +3,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7"
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^22.5.0"
   }
 }
