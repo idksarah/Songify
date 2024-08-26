@@ -1,5 +1,10 @@
 const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
-const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c';
+const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...
+
+//apis: musixmatch, geniusapi, bunch of pyhton libs 
+
+const geniusID = 'V6944-ceA2IL0n5RaZN8gSJ_nSG33D_-_Onbkg19F3cA-lVcXYgdj66dbHb7cbMI';
+const geniusSecret = 'z3oXktmqmxFxOUnVi1R7LmPrm_aipwGWtHrjgDn6LyEpLz9vFjoFUheAPF4pIXU1VqiFHZGTlpdXqw9dUMUEkA';
 
 async function getSpotifyToken() {
     const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -124,6 +129,9 @@ let songInfo;
 
 const songContainer = document.createElement("div");
 const streamingContainer = document.createElement("div");
+const topContainer = document.createElement("div");
+const home = document.createElement("img");
+const tryAgain = document.createElement("button");
 const DOMsongCover = document.createElement("img");
 const DOMsong = document.createElement("p");
 const DOMsongArtist = document.createElement("p");
@@ -146,6 +154,17 @@ function checkIfUserInputText(){
         if(!appIcons){
             songContainer.classList.add("songContainer");
             songContent.append(songContainer);
+
+            songContainer.appendChild(topContainer);
+            topContainer.classList.add("topContainer");
+
+            home.src = "https://i.pinimg.com/originals/d7/34/6c/d7346c03444c44944cf2f5b5674ccf27.png"
+            home.classList.add("home");
+            topContainer.appendChild(home);
+
+            tryAgain.textContent = "Not the right song? Try again!";
+            tryAgain.classList.add("tryAgain");
+            topContainer.appendChild(tryAgain);
     
             streamingContainer.classList.add("streamingContainer");
             songContent.append(streamingContainer);
