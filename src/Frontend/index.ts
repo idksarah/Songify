@@ -119,7 +119,8 @@ input.addEventListener("keypress", (event) => {
 });
 
 const songContent = document.querySelector<HTMLElement>(".songContent");
-let song:String, songArtist:String, songCover:HTMLImageElement, songLink:HTMLAnchorElement, songLyrics:String, songInfo;
+let song:String, songArtist:String, songCover:HTMLImageElement, songLyrics:String;
+let songInfo;
 
 const songContainer = document.createElement("div");
 const streamingContainer = document.createElement("div");
@@ -153,11 +154,10 @@ function checkIfUserInputText(){
             spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
             spotify.classList.add("spotify", "icon");
             streamingContainer.append(spotify);
-    
-            const itunes = document.createElement("img"); //change to a better img
-            itunes.src = "https://static.vecteezy.com/system/resources/previews/046/437/292/non_2x/itunes-music-icon-free-png.png";
-            itunes.classList.add("itunes", "icon");
-            streamingContainer.append(itunes);
+
+            spotify.addEventListener("click", () => {
+                window.open(spotifyLink.toString(), "_blank");
+            });
     
             DOMsongCover.classList.add("songCover");
             songContainer.appendChild(DOMsongCover);

@@ -152,6 +152,7 @@ html, body, content {
     width: 3em;
     height: auto;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .itunes {
