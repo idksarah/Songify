@@ -6,13 +6,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 29032006
       POSTGRES_DB: music
-    ports:
-      - "5432:5432"
+    networks:
+      - internal_network
 
   app:
     build: .
-    ports:
-      - "8082:8082"
+    networks:
+      - internal_network
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/music
       SPRING_DATASOURCE_USERNAME: postgres
@@ -30,3 +30,14 @@ services:
     depends_on:
       - db
       - app
+
+  webserver:
+    build: ./apache
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  internal_network:
+    internal: true
