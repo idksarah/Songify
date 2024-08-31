@@ -1,4 +1,4 @@
-const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
+/*const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
 const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...
 
 //apis: musixmatch, geniusapi, bunch of pyhton libs 
@@ -51,7 +51,7 @@ async function searchSong(query) {
     } catch (error) {
         console.error('Error:', error);
     }
-}
+}*/
 
 const content = document.querySelector<HTMLElement>('.content');
 const title = document.querySelector('.title');
@@ -138,7 +138,7 @@ const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
 function checkIfUserInputText(){
-    if(lyrics != undefined || lyrics != "" || lyrics != 'Enter a song/artist name!'){
+    /*if(lyrics != undefined || lyrics != "" || lyrics != 'Enter a song/artist name!'){
         searchSong(lyrics).then(result => {
             songInfo = result;
             DOMsong.textContent = songInfo.name;
@@ -189,5 +189,5 @@ function checkIfUserInputText(){
 
             appIcons = true;
         }
-    }
+    }*/
 }
