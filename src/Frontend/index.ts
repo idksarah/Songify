@@ -1,8 +1,6 @@
 const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
 const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...
 
-//apis: musixmatch, geniusapi, bunch of pyhton libs 
-
 const geniusID = 'V6944-ceA2IL0n5RaZN8gSJ_nSG33D_-_Onbkg19F3cA-lVcXYgdj66dbHb7cbMI';
 const geniusSecret = 'z3oXktmqmxFxOUnVi1R7LmPrm_aipwGWtHrjgDn6LyEpLz9vFjoFUheAPF4pIXU1VqiFHZGTlpdXqw9dUMUEkA';
 
