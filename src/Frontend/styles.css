@@ -98,7 +98,7 @@ html, body, content {
     padding-right: 3em;
 }
 
-.songContainer{
+.recContainer{
     background-color: rgba(247, 247, 247, .65);
     height: fit-content;
     width: 45vh;
@@ -138,7 +138,7 @@ html, body, content {
     color: rgb(253, 162, 59);
 }
 
-.songContent{
+.recContent{
     display: flex;
     flex-direction: column;
     align-items: center;

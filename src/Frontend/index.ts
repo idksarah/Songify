@@ -123,11 +123,11 @@ input.addEventListener("keypress", (event) => {
     handleEnter(event);
 });
 
-const songContent = document.querySelector<HTMLElement>(".songContent");
+const recContent = document.querySelector<HTMLElement>(".recContent");
 let song:String, songArtist:String, songCover:HTMLImageElement, songLyrics:String;
 let songInfo;
 
-const songContainer = document.createElement("div");
+const recContainer = document.createElement("div");
 const streamingContainer = document.createElement("div");
 const topContainer = document.createElement("div");
 const home = document.createElement("img");
@@ -152,22 +152,14 @@ function checkIfUserInputText(){
         input.classList.add("hidden");
 
         if(!appIcons){
-            songContainer.classList.add("songContainer");
-            songContent.append(songContainer);
+            recContainer.classList.add("recContainer");
+            recContent.classList.remove("hidden");
+            recContent.append(recContainer);
 
-            songContainer.appendChild(topContainer);
-            topContainer.classList.add("topContainer");
-
-            home.src = "https://i.pinimg.com/originals/d7/34/6c/d7346c03444c44944cf2f5b5674ccf27.png"
-            home.classList.add("home");
-            topContainer.appendChild(home);
-
-            tryAgain.textContent = "Not the right song? Try again!";
-            tryAgain.classList.add("tryAgain");
-            topContainer.appendChild(tryAgain);
+            recContainer.appendChild(topContainer);
     
             streamingContainer.classList.add("streamingContainer");
-            songContent.append(streamingContainer);
+            recContent.append(streamingContainer);
             
             const spotify = document.createElement("img");
             spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
@@ -179,13 +171,13 @@ function checkIfUserInputText(){
             });
     
             DOMsongCover.classList.add("songCover");
-            songContainer.appendChild(DOMsongCover);
+            recContainer.appendChild(DOMsongCover);
     
             DOMsong.classList.add("text", "song");
-            songContainer.appendChild(DOMsong);
+            recContainer.appendChild(DOMsong);
     
             DOMsongArtist.classList.add("text", "songArtist");
-            songContainer.appendChild(DOMsongArtist);
+            recContainer.appendChild(DOMsongArtist);
 
             appIcons = true;
         }

@@ -191,10 +191,10 @@ input.addEventListener("mouseleave", function () {
 input.addEventListener("keypress", function (event) {
     handleEnter(event);
 });
-var songContent = document.querySelector(".songContent");
+var recContent = document.querySelector(".recContent");
 var song, songArtist, songCover, songLyrics;
 var songInfo;
-var songContainer = document.createElement("div");
+var recContainer = document.createElement("div");
 var streamingContainer = document.createElement("div");
 var topContainer = document.createElement("div");
 var home = document.createElement("img");
@@ -216,18 +216,12 @@ function checkIfUserInputText() {
         title.classList.add("hidden");
         input.classList.add("hidden");
         if (!appIcons) {
-            songContainer.classList.add("songContainer");
-            songContent.append(songContainer);
-            songContainer.appendChild(topContainer);
-            topContainer.classList.add("topContainer");
-            home.src = "https://i.pinimg.com/originals/d7/34/6c/d7346c03444c44944cf2f5b5674ccf27.png";
-            home.classList.add("home");
-            topContainer.appendChild(home);
-            tryAgain.textContent = "Not the right song? Try again!";
-            tryAgain.classList.add("tryAgain");
-            topContainer.appendChild(tryAgain);
+            recContainer.classList.add("recContainer");
+            recContent.classList.remove("hidden");
+            recContent.append(recContainer);
+            recContainer.appendChild(topContainer);
             streamingContainer.classList.add("streamingContainer");
-            songContent.append(streamingContainer);
+            recContent.append(streamingContainer);
             var spotify = document.createElement("img");
             spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
             spotify.classList.add("spotify", "icon");
@@ -236,11 +230,11 @@ function checkIfUserInputText() {
                 window.open(spotifyLink.toString(), "_blank");
             });
             DOMsongCover.classList.add("songCover");
-            songContainer.appendChild(DOMsongCover);
+            recContainer.appendChild(DOMsongCover);
             DOMsong.classList.add("text", "song");
-            songContainer.appendChild(DOMsong);
+            recContainer.appendChild(DOMsong);
             DOMsongArtist.classList.add("text", "songArtist");
-            songContainer.appendChild(DOMsongArtist);
+            recContainer.appendChild(DOMsongArtist);
             appIcons = true;
         }
     }
