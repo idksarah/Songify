@@ -1,3 +1,4 @@
+//god im rlly sorry for the js ur about to see......
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -45,11 +46,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
-var spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...
-//apis: musixmatch, geniusapi, bunch of pyhton libs 
-var geniusID = 'V6944-ceA2IL0n5RaZN8gSJ_nSG33D_-_Onbkg19F3cA-lVcXYgdj66dbHb7cbMI';
-var geniusSecret = 'z3oXktmqmxFxOUnVi1R7LmPrm_aipwGWtHrjgDn6LyEpLz9vFjoFUheAPF4pIXU1VqiFHZGTlpdXqw9dUMUEkA';
+/*const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
+const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...*/
+var currentState = "home";
+var originalText = "Enter the name of your favorite song!";
 function getSpotifyToken() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data;
@@ -135,10 +135,10 @@ var input = document.createElement('textarea');
 input.setAttribute('wrap', 'soft');
 input.classList.add("input", "text");
 var outsideInput = true;
-var lyrics;
+var songName;
 var appIcons = false;
 function whenInputClicked() {
-    if (input.value == 'Enter a song/artist name!') {
+    if (input.value == originalText) {
         input.value = '';
     }
     outsideInput = false;
@@ -151,46 +151,23 @@ function whenInputClicked() {
 function whenEnterOrClickOutside() {
     if (input.value == "") {
         input.classList.remove('yellowText');
-        input.value = 'Enter a song/artist name!';
+        input.value = originalText;
     }
 }
 function handleEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault();
-        if (input.value == 'Enter a song/artist name!' || input.value == "") {
+        if (input.value == originalText || input.value == "") {
             input.classList.remove('yellowText');
         }
         else {
             input.blur();
-            lyrics = input.value;
+            songName = input.value;
             checkIfUserInputText();
             whenEnterOrClickOutside();
         }
     }
 }
-content.appendChild(input);
-input.classList.add("input", "text");
-input.value = 'Enter a song/artist name!';
-input.addEventListener("click", function () {
-    input.classList.add('yellowText');
-    whenInputClicked();
-});
-input.addEventListener("mouseleave", function () {
-    outsideInput = true;
-    document.addEventListener("click", function () {
-        if (outsideInput == true) {
-            if (input.value != 'Enter a song/artist name!') {
-                lyrics = input.value;
-                input.blur();
-                checkIfUserInputText();
-            }
-        }
-    });
-    whenEnterOrClickOutside;
-});
-input.addEventListener("keypress", function (event) {
-    handleEnter(event);
-});
 var recContent = document.querySelector(".recContent");
 var song, songArtist, songCover, songLyrics;
 var songInfo;
@@ -203,9 +180,47 @@ var DOMsongCover = document.createElement("img");
 var DOMsong = document.createElement("p");
 var DOMsongArtist = document.createElement("p");
 var spotifyLink = document.createElement("a");
+function displaySongRec() {
+    recContainer.classList.add("recContainer");
+    recContent.classList.remove("hidden");
+    recContent.append(recContainer);
+    recContainer.appendChild(topContainer);
+    streamingContainer.classList.add("streamingContainer");
+    recContent.append(streamingContainer);
+    var spotify = document.createElement("img");
+    spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+    spotify.classList.add("spotify", "icon");
+    streamingContainer.append(spotify);
+    spotify.addEventListener("click", function () {
+        window.open(spotifyLink.toString(), "_blank");
+    });
+    DOMsongCover.classList.add("songCover");
+    recContainer.appendChild(DOMsongCover);
+    DOMsong.classList.add("text", "song");
+    recContainer.appendChild(DOMsong);
+    DOMsongArtist.classList.add("text", "songArtist");
+    recContainer.appendChild(DOMsongArtist);
+}
+var lyricContent = document.querySelector(".lyricContent");
+var lyricTopContainer = document.querySelector(".lyricTopContainer");
+var lyricBottomContainer = document.querySelector(".lyricBottomContainer");
+function displaySongLyrics() {
+    lyricContent.classList.add("recContainer");
+    lyricContent.classList.remove("hidden");
+    lyricContent.append(recContainer);
+    recContainer.appendChild(topContainer);
+    streamingContainer.classList.add("streamingContainer");
+    lyricContent.append(streamingContainer);
+    DOMsongCover.classList.add("songCover");
+    recContainer.appendChild(DOMsongCover);
+    DOMsong.classList.add("text", "song");
+    recContainer.appendChild(DOMsong);
+    DOMsongArtist.classList.add("text", "songArtist");
+    recContainer.appendChild(DOMsongArtist);
+}
 function checkIfUserInputText() {
-    if (lyrics != undefined || lyrics != "" || lyrics != 'Enter a song/artist name!') {
-        searchSong(lyrics).then(function (result) {
+    if (songName != undefined && songName != "" && songName != originalText) {
+        searchSong(songName).then(function (result) {
             songInfo = result;
             DOMsong.textContent = songInfo.name;
             DOMsongCover.src = songInfo.coverUrl;
@@ -215,27 +230,35 @@ function checkIfUserInputText() {
         });
         title.classList.add("hidden");
         input.classList.add("hidden");
-        if (!appIcons) {
-            recContainer.classList.add("recContainer");
-            recContent.classList.remove("hidden");
-            recContent.append(recContainer);
-            recContainer.appendChild(topContainer);
-            streamingContainer.classList.add("streamingContainer");
-            recContent.append(streamingContainer);
-            var spotify = document.createElement("img");
-            spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
-            spotify.classList.add("spotify", "icon");
-            streamingContainer.append(spotify);
-            spotify.addEventListener("click", function () {
-                window.open(spotifyLink.toString(), "_blank");
-            });
-            DOMsongCover.classList.add("songCover");
-            recContainer.appendChild(DOMsongCover);
-            DOMsong.classList.add("text", "song");
-            recContainer.appendChild(DOMsong);
-            DOMsongArtist.classList.add("text", "songArtist");
-            recContainer.appendChild(DOMsongArtist);
+        if (!appIcons) { //move this one
             appIcons = true;
+            displaySongRec();
         }
     }
 }
+content.appendChild(input);
+input.classList.add("input", "text");
+input.value = originalText;
+input.addEventListener("click", function () {
+    input.classList.add('yellowText');
+    whenInputClicked();
+});
+input.addEventListener("mouseleave", function () {
+    outsideInput = true;
+    document.addEventListener("click", function () {
+        if (outsideInput == true) {
+            if (input.value != originalText) {
+                songName = input.value;
+                input.blur();
+                checkIfUserInputText();
+            }
+        }
+    });
+    whenEnterOrClickOutside;
+});
+input.addEventListener("keypress", function (event) {
+    handleEnter(event);
+});
+//create some const for testing with an img, song name, lyrics, artist, and song link
+//break up ur fucking files jesus christ
+//take input to search through db (not rn tho), display song lyrics, allow user to highlight, then do the same song display
