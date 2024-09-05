@@ -47,6 +47,7 @@ html, body, content {
 
 .hidden{
     display: none;
+    visibility: hidden;
 }
 
 .footer {
@@ -98,7 +99,7 @@ html, body, content {
     padding-right: 3em;
 }
 
-.recContainer{
+.recContainer, .lyricContent{
     background-color: rgba(247, 247, 247, .65);
     height: fit-content;
     width: 45vh;

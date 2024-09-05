@@ -1,57 +1,7 @@
 //god im rlly sorry for the js ur about to see......
-
-/*const spotifyID = '872eb044caa442049aec8c2ffdfb11a7';
-const spotifySecret = 'c7dfaa9ed8bb4eed94c926a1ffdfd60c'; //should make this a local var on my comp but im kind of too lazy...*/
-
+//like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
 let currentState = "home";
 let originalText = "Enter the name of your favorite song!";
-
-async function getSpotifyToken() {
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(spotifyID + ':' + spotifySecret)
-        },
-        body: 'grant_type=client_credentials'
-    });
-    const data = await response.json();
-    return data.access_token;
-}
-
-async function searchSpotify(query, token) {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=1`, {
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    });
-    const data = await response.json();
-    if (data.tracks.items.length > 0) {
-        const track = data.tracks.items[0];
-        return {
-            name: track.name,
-            artist: track.artists[0].name,
-            album: track.album.name,
-            coverUrl: track.album.images[0].url,
-            songUrl: track.external_urls.spotify
-        };
-    }
-    return null;
-}
-
-async function searchSong(query) {
-    try {
-        const spotifyToken = await getSpotifyToken();
-        const songInfo = await searchSpotify(query, spotifyToken);
-        if (songInfo) {
-            return {
-                ...songInfo,
-            };
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
 
 const content = document.querySelector<HTMLElement>('.content');
 const title = document.querySelector('.title');
@@ -63,6 +13,57 @@ input.classList.add("input", "text");
 let outsideInput = true;
 let songName:String;
 let appIcons = false;
+
+const testSong = {
+    title: "Wonderwall",
+    artist: "Oasis",
+    lyrics: `Today is gonna be the day that they're gonna throw it back to you
+    And by now, you should've somehow realised what you gotta do
+    I don't believe that anybody feels the way I do about you now
+    And backbeat, the word is on the street that the fire in your heart is out
+    I'm sure you've heard it all before, but you never really had a doubt
+    I don't believe that anybody feels the way I do about you now
+    And all the roads we have to walk are winding
+    And all the lights that lead us there are blinding
+    There are many things that I would like to say to you, but I don't know how
+    Because maybe
+    You're gonna be the one that saves me
+    And after all
+    You're my wonderwall
+    Today was gonna be the day, but they'll never throw it back to you
+    And by now, you should've somehow realised what you're not to do
+    I don't believe that anybody feels the way I do about you now
+    And all the roads that lead you there were winding
+    And all the lights that light the way are blinding
+    There are many things that I would like to say to you, but I don't know how
+    I said maybe
+    You're gonna be the one that saves me
+    And after all
+    You're my wonderwall
+    I said maybe (I said maybe)
+    You're gonna be the one that saves me
+    And after all
+    You're my wonderwall
+    I said maybe (I said maybe)
+    You're gonna be the one that saves me (saves me)
+    You're gonna be the one that saves me (saves me)
+    You're gonna be the one that saves me (saves me)`,
+    coverUrl: "https://images.genius.com/2870a86cff5f609f220b3d84cd269248.300x300x1.jpg"
+};
+
+const testRec = {
+    title: "wheells on the bussssss",
+    artist: "cococmelon!",
+    lyrics: `the whelles on the bugs go round n round
+    round on round
+    round n round!!!!`,
+    coverUrl: "https://i.ytimg.com/vi/e_04ZrNroTo/maxresdefault.jpg"
+};
+
+function getSelectedText() {
+    const highlightedText = window.getSelection().toString();
+    return highlightedText;
+}
 
 function whenInputClicked(){
     if(input.value == originalText){
@@ -111,7 +112,7 @@ const DOMsong = document.createElement("p");
 const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
-function displaySongRec(){
+function displaySongRec(song){
     recContainer.classList.add("recContainer");
     recContent.classList.remove("hidden");
     recContent.append(recContainer);
@@ -131,57 +132,79 @@ function displaySongRec(){
     });
 
     DOMsongCover.classList.add("songCover");
+    DOMsongCover.textContent = song.coverUrl;
     recContainer.appendChild(DOMsongCover);
 
     DOMsong.classList.add("text", "song");
+    DOMsong.textContent = song.title;
     recContainer.appendChild(DOMsong);
 
     DOMsongArtist.classList.add("text", "songArtist");
+    DOMsongArtist.textContent = song.artist;
     recContainer.appendChild(DOMsongArtist);
 }
 
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");
+const recRightContainer = document.createElement("div");
+const recTopContainer = document.createElement("div");
+let DOMlyrics = document.createElement("p");
 
 const lyricTopContainer = document.querySelector<HTMLDivElement>(".lyricTopContainer");
 const lyricBottomContainer = document.querySelector<HTMLDivElement>(".lyricBottomContainer");
 
 function displaySongLyrics(){
-    lyricContent.classList.add("recContainer");
     lyricContent.classList.remove("hidden");
-    lyricContent.append(recContainer);
+    lyricContent.appendChild(recContainer);
+
+    DOMlyrics.textContent = testSong.lyrics;
+    DOMlyrics.classList.add("text", "lyrics");
+    lyricContent.appendChild(DOMlyrics);
 
     recContainer.appendChild(topContainer);
 
-    streamingContainer.classList.add("streamingContainer");
-    lyricContent.append(streamingContainer);
+    recTopContainer.classList.add(".recTopContainer");
+    recContainer.appendChild(recTopContainer)
 
     DOMsongCover.classList.add("songCover");
-    recContainer.appendChild(DOMsongCover);
+    recTopContainer.appendChild(DOMsongCover);
+
+    recRightContainer.classList.add(".recRightContainer");
+    recTopContainer.appendChild(recRightContainer)
 
     DOMsong.classList.add("text", "song");
-    recContainer.appendChild(DOMsong);
+    recRightContainer.appendChild(DOMsong);
 
     DOMsongArtist.classList.add("text", "songArtist");
-    recContainer.appendChild(DOMsongArtist);
+    recRightContainer.appendChild(DOMsongArtist);
 }
 
 function checkIfUserInputText(){
     if(songName != undefined && songName != "" && songName != originalText){
-        searchSong(songName).then(result => {
-            songInfo = result;
-            DOMsong.textContent = songInfo.name;
-            DOMsongCover.src = songInfo.coverUrl;
-            DOMsongArtist.textContent = songInfo.artist;
-            spotifyLink.href = songInfo.songUrl;
-            spotifyLink.target = "_blank";
-        });
+        DOMsong.textContent = testSong.title;
+        DOMsongCover.src = testSong.coverUrl;
+        DOMsongArtist.textContent = testSong.artist;
+        //spotifyLink.href = testSong.songUrl; would be vry good to have a spotify link but whatev
+        //spotifyLink.target = "_blank";
 
         title.classList.add("hidden");
         input.classList.add("hidden");
 
+        displaySongLyrics();
+        lyricContent.addEventListener("click", () => {
+            let highlightText = getSelectedText();
+            if(highlightText != ""){
+                if(highlightText.length > 100){
+                    alert("Please choose lyrics under 100 characters!");
+                } else {
+                    console.log(highlightText);
+                    lyricContent.classList.add("hidden");
+                    displaySongRec(testRec);
+                }
+            }
+        })
+
         if(!appIcons){ //move this one
             appIcons = true;
-            displaySongRec();
         }
     }
 }
