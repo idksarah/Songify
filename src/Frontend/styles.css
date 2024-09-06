@@ -188,3 +188,8 @@ html, body, content, lyricContent {
     display: none;
     visibility: hidden;
 }
+
+.idkwhyhiddendoesntworkbutthisdoesso {
+    display: none;
+    visibility: hidden;
+}

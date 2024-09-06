@@ -104,7 +104,6 @@ let songInfo;
 
 const recContainer = document.createElement("div");
 const streamingContainer = document.createElement("div");
-const topContainer = document.createElement("div");
 const home = document.createElement("img");
 const tryAgain = document.createElement("button");
 const DOMsongCover = document.createElement("img");
@@ -112,36 +111,45 @@ const DOMsong = document.createElement("p");
 const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
+const topContainer = document.querySelector(".topContainer");
+
 function displaySongRec(song){
+    recContainer.innerHTML = '';
+    streamingContainer.innerHTML = '';
+
     recContainer.classList.add("recContainer");
     recContent.classList.remove("hidden");
-    recContent.append(recContainer);
+
+    streamingContainer.classList.add("streamingContainer");
+    recContainer.appendChild(streamingContainer);
 
     recContainer.appendChild(topContainer);
 
-    streamingContainer.classList.add("streamingContainer");
-    recContent.append(streamingContainer);
-    
-    const spotify = document.createElement("img");
-    spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
-    spotify.classList.add("spotify", "icon");
-    streamingContainer.append(spotify);
+    if(!appIcons){
+        appIcons = true;
+        const spotify = document.createElement("img");
+        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+        spotify.classList.add("spotify", "icon");
+        streamingContainer.appendChild(spotify);
 
-    spotify.addEventListener("click", () => {
-        window.open(spotifyLink.toString(), "_blank");
-    });
+        spotify.addEventListener("click", () => {
+            window.open(spotifyLink.toString(), "_blank");
+        });
+    }
 
     DOMsongCover.classList.add("songCover");
-    DOMsongCover.textContent = song.coverUrl;
-    recContainer.appendChild(DOMsongCover);
+    DOMsongCover.src = song.coverUrl;
+    topContainer.appendChild(DOMsongCover);
 
     DOMsong.classList.add("text", "song");
     DOMsong.textContent = song.title;
-    recContainer.appendChild(DOMsong);
+    topContainer.appendChild(DOMsong);
 
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
-    recContainer.appendChild(DOMsongArtist);
+    topContainer.appendChild(DOMsongArtist);
+
+    recContent.appendChild(recContainer); //why r u disappearing im sobbing
 }
 
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");
@@ -159,8 +167,6 @@ function displaySongLyrics(){
     DOMlyrics.textContent = testSong.lyrics;
     DOMlyrics.classList.add("text", "lyrics");
     lyricContent.appendChild(DOMlyrics);
-
-    recContainer.appendChild(topContainer);
 
     recTopContainer.classList.add(".recTopContainer");
     recContainer.appendChild(recTopContainer)
@@ -190,22 +196,22 @@ function checkIfUserInputText(){
         input.classList.add("hidden");
 
         displaySongLyrics();
-        lyricContent.addEventListener("click", () => {
+        function runOnLyricContent() {
             let highlightText = getSelectedText();
             if(highlightText != ""){
                 if(highlightText.length > 100){
                     alert("Please choose lyrics under 100 characters!");
                 } else {
                     console.log(highlightText);
-                    lyricContent.classList.add("hidden");
+                    lyricContent.classList.add("idkwhyhiddendoesntworkbutthisdoesso");
+                    recContainer.classList.remove("hidden");
                     displaySongRec(testRec);
                 }
             }
-        })
-
-        if(!appIcons){ //move this one
-            appIcons = true;
         }
+
+        lyricContent.addEventListener("click", runOnLyricContent);
+
     }
 }
 

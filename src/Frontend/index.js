@@ -62,36 +62,41 @@ var song, songArtist, songCover, songLyrics;
 var songInfo;
 var recContainer = document.createElement("div");
 var streamingContainer = document.createElement("div");
-var topContainer = document.createElement("div");
 var home = document.createElement("img");
 var tryAgain = document.createElement("button");
 var DOMsongCover = document.createElement("img");
 var DOMsong = document.createElement("p");
 var DOMsongArtist = document.createElement("p");
 var spotifyLink = document.createElement("a");
+var topContainer = document.querySelector(".topContainer");
 function displaySongRec(song) {
+    recContainer.innerHTML = '';
+    streamingContainer.innerHTML = '';
     recContainer.classList.add("recContainer");
     recContent.classList.remove("hidden");
-    recContent.append(recContainer);
-    recContainer.appendChild(topContainer);
     streamingContainer.classList.add("streamingContainer");
-    recContent.append(streamingContainer);
-    var spotify = document.createElement("img");
-    spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
-    spotify.classList.add("spotify", "icon");
-    streamingContainer.append(spotify);
-    spotify.addEventListener("click", function () {
-        window.open(spotifyLink.toString(), "_blank");
-    });
+    recContainer.appendChild(streamingContainer);
+    recContainer.appendChild(topContainer);
+    if (!appIcons) {
+        appIcons = true;
+        var spotify = document.createElement("img");
+        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+        spotify.classList.add("spotify", "icon");
+        streamingContainer.appendChild(spotify);
+        spotify.addEventListener("click", function () {
+            window.open(spotifyLink.toString(), "_blank");
+        });
+    }
     DOMsongCover.classList.add("songCover");
-    DOMsongCover.textContent = song.coverUrl;
-    recContainer.appendChild(DOMsongCover);
+    DOMsongCover.src = song.coverUrl;
+    topContainer.appendChild(DOMsongCover);
     DOMsong.classList.add("text", "song");
     DOMsong.textContent = song.title;
-    recContainer.appendChild(DOMsong);
+    topContainer.appendChild(DOMsong);
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
-    recContainer.appendChild(DOMsongArtist);
+    topContainer.appendChild(DOMsongArtist);
+    recContent.appendChild(recContainer); //why r u disappearing im sobbing
 }
 var lyricContent = document.querySelector(".lyricContent");
 var recRightContainer = document.createElement("div");
@@ -105,7 +110,6 @@ function displaySongLyrics() {
     DOMlyrics.textContent = testSong.lyrics;
     DOMlyrics.classList.add("text", "lyrics");
     lyricContent.appendChild(DOMlyrics);
-    recContainer.appendChild(topContainer);
     recTopContainer.classList.add(".recTopContainer");
     recContainer.appendChild(recTopContainer);
     DOMsongCover.classList.add("songCover");
@@ -127,7 +131,7 @@ function checkIfUserInputText() {
         title.classList.add("hidden");
         input.classList.add("hidden");
         displaySongLyrics();
-        lyricContent.addEventListener("click", function () {
+        function runOnLyricContent() {
             var highlightText = getSelectedText();
             if (highlightText != "") {
                 if (highlightText.length > 100) {
@@ -135,14 +139,13 @@ function checkIfUserInputText() {
                 }
                 else {
                     console.log(highlightText);
-                    lyricContent.classList.add("hidden");
+                    lyricContent.classList.add("idkwhyhiddendoesntworkbutthisdoesso");
+                    recContainer.classList.remove("hidden");
                     displaySongRec(testRec);
                 }
             }
-        });
-        if (!appIcons) { //move this one
-            appIcons = true;
         }
+        lyricContent.addEventListener("click", runOnLyricContent);
     }
 }
 content.appendChild(input);
