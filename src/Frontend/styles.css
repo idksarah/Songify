@@ -1,4 +1,4 @@
-.content, lyricContent{
+.content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +23,8 @@ body {
     overflow-x: hidden;
     margin: 0;
     background-image: url("./imgs/noise.avif");
+    display: flex;
+    flex-direction: column;
 }
 
 html, body, content, lyricContent {
@@ -43,11 +45,6 @@ html, body, content, lyricContent {
     cursor: pointer;
     border-bottom: 2px solid rgb(36, 36, 36);
     margin-top: -8vh;
-}
-
-.hidden{
-    display: none;
-    visibility: hidden;
 }
 
 .footer {
@@ -110,6 +107,11 @@ html, body, content, lyricContent {
     flex-direction: column;
     align-items: center;
     margin: 8vh;
+}
+
+.lyricContent {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .songCover{
@@ -180,4 +182,9 @@ html, body, content, lyricContent {
     border-radius: 5px;
     padding: 10px;
     width: 40em;
+}
+
+.hidden{
+    display: none;
+    visibility: hidden;
 }
