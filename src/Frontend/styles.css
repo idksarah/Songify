@@ -1,4 +1,4 @@
-.content{
+.content, lyricContent{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +25,7 @@ body {
     background-image: url("./imgs/noise.avif");
 }
 
-html, body, content {
+html, body, content, lyricContent {
     min-height: 100%;
 }
 
