@@ -3,15 +3,15 @@ services:
 
   app:
     build: .
-    networks:
-      - internal_network
+    #networks:
+    #  - internal_network
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://music.c1i8k6kqwojb.eu-west-2.rds.amazonaws.com:5432/initial_db?sslmode=require
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 29032006
       SERVER_PORT: 8082
-    volumes:
-      - ./csv:/app/csv 
+    ports:
+      - "8082:8082"  # Map the container's port 8082 to the host's port 8082
 
   webapp:
     build: ./python
@@ -20,13 +20,12 @@ services:
     depends_on:
       - app
 
-  webserver:
-    build: ./apache
+  #webserver:
+  #  build: ./apache
+  #  ports:
+  #    - "80:80"
+  #    - "443:443"
 
-    ports:
-      - "80:80"
-      - "443:443"
-
-networks:
-  internal_network:
-    internal: true
+#networks:
+ # internal_network:
+  #  internal: true
