@@ -1,25 +1,15 @@
 version: '3.8'
 services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 29032006
-      POSTGRES_DB: music
-    ports:
-      - "5432:5432"
 
   app:
     build: .
     ports:
       - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/music
+      SPRING_DATASOURCE_URL: jdbc:postgresql://music.c1i8k6kqwojb.eu-west-2.rds.amazonaws.com:5432/initial_db?sslmode=require
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 29032006
       SERVER_PORT: 8082
-    depends_on:
-      - db
     volumes:
       - ./csv:/app/csv 
 
@@ -28,5 +18,4 @@ services:
     ports:
       - "7300:7300"
     depends_on:
-      - db
       - app

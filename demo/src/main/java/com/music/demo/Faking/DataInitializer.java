@@ -43,7 +43,7 @@ public class DataInitializer {
 
     private int numberOfUsers;
 
-    @PostConstruct
+    //@PostConstruct
     public void populateDatabaseWithSongs() {
         List<Song> songs = parseSongs();
         for(Song song:songs){
