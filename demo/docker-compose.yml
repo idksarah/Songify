@@ -3,8 +3,6 @@ services:
 
   app:
     build: .
-    networks:
-      - internal_network
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://music.c1i8k6kqwojb.eu-west-2.rds.amazonaws.com:5432/initial_db?sslmode=require
       SPRING_DATASOURCE_USERNAME: postgres
@@ -26,7 +24,3 @@ services:
     ports:
       - "80:80"
       - "443:443"
-
-networks:
-  internal_network:
-    internal: true
