@@ -40,7 +40,7 @@ function getSong(input) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    url = "http://127.0.0.1:8000/api/find-songs";
+                    url = "http://localhost:7300/api/find-songs";
                     console.log(url);
                     _a.label = 1;
                 case 1:

@@ -20,11 +20,11 @@ services:
     depends_on:
       - app
 
-  #webserver:
-  #  build: ./apache
-  #  ports:
-  #    - "80:80"
-  #    - "443:443"
+  webserver:
+    build: ./apache
+    ports:
+      - "80:80"
+      - "443:443"
 
 #networks:
  # internal_network:
