@@ -112,6 +112,9 @@ const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
 const topContainer = document.querySelector(".topContainer");
+const recImage = document.querySelector<HTMLImageElement>(".recImage");
+const recTitle = document.querySelector(".recTitle");
+const recArtist = document.querySelector(".recTitle");
 
 function displaySongRec(song){
     recContainer.innerHTML = '';
@@ -148,8 +151,6 @@ function displaySongRec(song){
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
-
-    recContent.appendChild(recContainer); //why r u disappearing im sobbing
 }
 
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");

@@ -69,6 +69,9 @@ var DOMsong = document.createElement("p");
 var DOMsongArtist = document.createElement("p");
 var spotifyLink = document.createElement("a");
 var topContainer = document.querySelector(".topContainer");
+var recImage = document.querySelector(".recImage");
+var recTitle = document.querySelector(".recTitle");
+var recArtist = document.querySelector(".recTitle");
 function displaySongRec(song) {
     recContainer.innerHTML = '';
     streamingContainer.innerHTML = '';
@@ -96,7 +99,6 @@ function displaySongRec(song) {
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
-    recContent.appendChild(recContainer); //why r u disappearing im sobbing
 }
 var lyricContent = document.querySelector(".lyricContent");
 var recRightContainer = document.createElement("div");
