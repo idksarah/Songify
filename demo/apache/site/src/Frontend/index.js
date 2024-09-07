@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 async function getSong(input) {
     let url = `http://127.0.0.1:8000/api/find-songs`;
     console.log(url);
@@ -24,8 +23,6 @@ let test = {
     "tags": ["help"]
 };
 
-=======
->>>>>>> 3c965f7dcad172fe05a503fca0b80a2f7d025ea3
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
 var currentState = "home";
