@@ -1,5 +1,9 @@
 async function getSong(input) {
+<<<<<<< HEAD
     let url = `http://127.0.0.1:8000/api/find-songs`;
+=======
+    let url = `http://localhost:8000/findSongs`;
+>>>>>>> 3c965f7dcad172fe05a503fca0b80a2f7d025ea3
     console.log(url);
 
     try {
@@ -136,7 +140,14 @@ const DOMsong = document.createElement("p");
 const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
+<<<<<<< HEAD
 const topContainer = document.querySelector<HTMLDivElement>(".topContainer");
+=======
+const topContainer = document.querySelector(".topContainer");
+const recImage = document.querySelector<HTMLImageElement>(".recImage");
+const recTitle = document.querySelector(".recTitle");
+const recArtist = document.querySelector(".recTitle");
+>>>>>>> 3c965f7dcad172fe05a503fca0b80a2f7d025ea3
 
 function displaySongRec(song){
     alert("??????");
