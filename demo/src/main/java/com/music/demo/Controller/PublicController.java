@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:7300", allowedHeaders = "*")
+@CrossOrigin(origins = "http://webapp:7300", allowedHeaders = "*")
 public class PublicController {
     private final PublicService service;
 

@@ -19,7 +19,7 @@ app = FastAPI(lifespan=lifespan)
 origins = [
     "http://localhost",
     "http://localhost:5500",
-    "https://idksarah.github.io/nanocats-peddie/"
+    "idksarah.github.io/Songify/"
 ]
 
 app.add_middleware(
