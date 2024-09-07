@@ -1,3 +1,28 @@
+async function getSong(input) {
+    let url = `http://127.0.0.1:8000/api/find-songs`;
+    console.log(url);
+
+    try {
+        let response = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(input)
+        });
+        let data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+let test = {
+    "sessionID": "killme",
+    "tags": ["help"]
+};
+
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
 let currentState = "home";
