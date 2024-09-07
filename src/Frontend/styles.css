@@ -14,7 +14,7 @@
 }
 
 .title{
-    font-size: 12em;
+    font-size: 10.5em;
     color: rgb(36, 36, 36);
 }
 
@@ -23,9 +23,11 @@ body {
     overflow-x: hidden;
     margin: 0;
     background-image: url("./imgs/noise.avif");
+    display: flex;
+    flex-direction: column;
 }
 
-html, body, content {
+html, body, content, lyricContent {
     min-height: 100%;
 }
 
@@ -43,10 +45,6 @@ html, body, content {
     cursor: pointer;
     border-bottom: 2px solid rgb(36, 36, 36);
     margin-top: -8vh;
-}
-
-.hidden{
-    display: none;
 }
 
 .footer {
@@ -98,7 +96,7 @@ html, body, content {
     padding-right: 3em;
 }
 
-.songContainer{
+.recContainer, .lyricContent{
     background-color: rgba(247, 247, 247, .65);
     height: fit-content;
     width: 45vh;
@@ -109,6 +107,11 @@ html, body, content {
     flex-direction: column;
     align-items: center;
     margin: 8vh;
+}
+
+.lyricContent {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .songCover{
@@ -138,7 +141,7 @@ html, body, content {
     color: rgb(253, 162, 59);
 }
 
-.songContent{
+.recContent{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,9 +155,41 @@ html, body, content {
     width: 3em;
     height: auto;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .itunes {
     width: 6em;
     height: auto;
+}
+
+.topContainer{
+    width: 10em;
+    display: flex;
+    flex-direction: row;
+    margin: 2em;
+    justify-content: left;
+}
+
+.home {
+    height: 3em;
+    margin: 2em;
+}
+
+.tryAgain{
+    background-color: rgb(253, 162, 59);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 40em;
+}
+
+.hidden{
+    display: none;
+    visibility: hidden;
+}
+
+.idkwhyhiddendoesntworkbutthisdoesso {
+    display: none;
+    visibility: hidden;
 }
