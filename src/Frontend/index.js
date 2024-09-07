@@ -142,6 +142,9 @@ var DOMsong = document.createElement("p");
 var DOMsongArtist = document.createElement("p");
 var spotifyLink = document.createElement("a");
 var topContainer = document.querySelector(".topContainer");
+var recImage = document.querySelector(".recImage");
+var recTitle = document.querySelector(".recTitle");
+var recArtist = document.querySelector(".recTitle");
 function displaySongRec(song) {
     alert("??????");
     console.log(song);

@@ -23,6 +23,7 @@ let test = {
     "tags": ["help"]
 };
 
+
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
 let currentState = "home";
@@ -123,11 +124,10 @@ function handleEnter(event){
     }
 }
 
-const recContent = document.querySelector<HTMLElement>(".recContent");
+const recContent = document.querySelector<HTMLDivElement>(".recContent");
 let song:String, songArtist:String, songCover:HTMLImageElement, songLyrics:String;
 let songInfo;
 
-const recContainer = document.createElement("div");
 const streamingContainer = document.createElement("div");
 const home = document.createElement("img");
 const tryAgain = document.createElement("button");
@@ -137,18 +137,22 @@ const DOMsongArtist = document.createElement("p");
 const spotifyLink = document.createElement("a");
 
 const topContainer = document.querySelector(".topContainer");
+const recImage = document.querySelector<HTMLImageElement>(".recImage");
+const recTitle = document.querySelector(".recTitle");
+const recArtist = document.querySelector(".recTitle");
 
 function displaySongRec(song){
-    recContainer.innerHTML = '';
+    alert("??????");
+    console.log(song);
+    recContent.innerHTML = '';
     streamingContainer.innerHTML = '';
-
-    recContainer.classList.add("recContainer");
-    recContent.classList.remove("hidden");
+    
+    recContent.classList.remove("hidden"); //why can't it remove classes?
 
     streamingContainer.classList.add("streamingContainer");
     recContainer.appendChild(streamingContainer);
 
-    recContainer.appendChild(topContainer);
+    recContent.appendChild(topContainer);
 
     if(!appIcons){
         appIcons = true;
@@ -173,8 +177,6 @@ function displaySongRec(song){
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
-
-    recContent.appendChild(recContainer); //why r u disappearing im sobbing
 }
 
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");
