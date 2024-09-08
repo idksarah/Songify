@@ -28,6 +28,11 @@ public class PublicController {
     public List<Song> songs(){
         return service.allSongs();
     }
+    @GetMapping("/song")
+    public Song specificSong(){
+        Song song = new Song();
+        return song;
+    }
     @PostMapping("/new_song")
     public ResponseEntity<Object> newSong(@RequestBody Song song ){
         if(!service.existsByTitleAndArtist(song)){

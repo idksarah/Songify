@@ -1,12 +1,10 @@
 package com.music.demo.Entites;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -16,23 +14,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "songs")
+@Table(name = "lyrics")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Song {
+public class Lyrics {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String title;
-    private String artist;
+    @OneToOne
+    @JoinColumn(name = "song_id", referencedColumnName = "id")
+    private Song song;
 
-    @OneToOne(mappedBy = "song", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Lyrics lyrics;
-    
-    /*@Lob
-    @Column(columnDefinition = "TEXT")
-    private String lyrics;*/
+    @Lob
+    private String lyricText;
 }
