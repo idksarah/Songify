@@ -1,0 +1,16 @@
+com\music\demo\Entites\Song.class
+com\music\demo\Repositories\UserRepository.class
+com\music\demo\Controller\PublicController.class
+com\music\demo\Repositories\SongRepository.class
+com\music\demo\Entites\User.class
+com\music\demo\Configs\FakerConfig.class
+com\music\demo\MusicApplication.class
+com\music\demo\Service\SongSpecifications.class
+com\music\demo\Entites\Lyrics.class
+com\music\demo\DTO\SongDTO.class
+com\music\demo\Entites\Lyrics$LyricsBuilder.class
+com\music\demo\DTO\SongDTO$SongDTOBuilder.class
+com\music\demo\Entites\User$UserBuilder.class
+com\music\demo\Faking\DataInitializer.class
+com\music\demo\Entites\Song$SongBuilder.class
+com\music\demo\Service\PublicService.class

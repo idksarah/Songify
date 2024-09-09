@@ -1,5 +1,8 @@
 package com.music.demo.Entites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +29,7 @@ public class Lyrics {
 
     @OneToOne
     @JoinColumn(name = "song_id", referencedColumnName = "id")
+    @JsonBackReference
     private Song song;
 
     @Lob
