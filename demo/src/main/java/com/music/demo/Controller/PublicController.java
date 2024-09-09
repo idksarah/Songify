@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class PublicController {
     private final PublicService service;
 
-    @GetMapping("/songs")
+    /*@GetMapping("/songs")
     public ResponseEntity<List<SongDTO>> songs() {
         System.out.println("Hello");
         List<Song> songs = service.allSongs();
@@ -42,7 +42,7 @@ public class PublicController {
         }
         
         return ResponseEntity.ok(resSongs);  // Return 200 OK with the list of songs
-    }
+    }*/
 
     @GetMapping("/song")
     public ResponseEntity<SongDTO> specificSong(@RequestParam(required = false) Long id,
