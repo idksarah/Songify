@@ -156,8 +156,8 @@ def genLiknesScore(SongName:str,SongArtist:str,tags:str):
         #levenshtein Distance
         levenshteinDistanceAveage = 0
 
-        levenshteinDistanceAveage += levenshteinDistance(SongName,tag)
-        levenshteinDistanceAveage += levenshteinDistance(SongArtistSoundex,tag)
+        levenshteinDistanceAveage += 1 / (1 + pow(2.71828,(-0.3 * (levenshteinDistance(SongName,tag) - 7.5))))
+        levenshteinDistanceAveage += 1 / (1 + pow(2.71828,(-0.3 * (levenshteinDistance(SongArtist,tag) - 7.5))))
         levenshteinDistanceAveage = levenshteinDistanceAveage/2
 
         #average both
