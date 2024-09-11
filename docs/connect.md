@@ -5,6 +5,8 @@
 Nanocats have used both get and post requests as needed.
 Api's and their use are located:
 
+## NOTE sessionID and similar security are temporaraly uneeded
+
 - [Find songs](#find-songs)
 
 - [New song](#new-song)
@@ -39,14 +41,7 @@ Example return
     {
         "title":str,
         "artist":str,
-        "lyrics": CLOB
-    },
-    {
-        "title":str,
-        "artist":str,
-        "lyrics": str
-    },
-    ...
+    }
 }
 ```
 

@@ -4,6 +4,8 @@
 
 Nanocats elected to use session based authentication for users.
 
+## Note this is unused
+
 Go to [Networks](connect.md) to find out how.
 
 Once account name and passwords have been passed you will get a UUID.
