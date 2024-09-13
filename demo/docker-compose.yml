@@ -20,6 +20,24 @@ services:
     depends_on:
       - app
 
+  webserver:
+    build: ./apache
+    ports:
+      - "80:80"
+      - "443:443"
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    #command: ["run", "llama2"]  # Command to automatically pull and run Llama 2
+    environment:
+      - MODEL=llama2
+
+volumes:
+    ollama:
+
   #webserver:
   #  build: ./apache
   #  ports:

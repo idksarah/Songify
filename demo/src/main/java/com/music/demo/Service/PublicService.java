@@ -2,6 +2,7 @@ package com.music.demo.Service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.music.demo.Entites.Song;
@@ -44,5 +45,9 @@ public class PublicService {
     }
     public User findUserEmail(String email){
         return users.findByEmail(email);
+    }
+    public List<Song> findSpecifically(Long id, String title, String artist) {
+        Specification<Song> spec = SongSpecifications.findByCriteria(id, title, artist);
+        return songs.findAll(spec);
     }
 }

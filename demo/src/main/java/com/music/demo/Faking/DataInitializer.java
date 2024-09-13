@@ -74,7 +74,6 @@ public class DataInitializer {
                 Song song = Song.builder()
                 .title(title)
                 .artist(artist)
-                .lyrics(lyrics)
                 .build();
 
                 songs.add(song);

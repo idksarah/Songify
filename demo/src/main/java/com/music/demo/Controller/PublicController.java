@@ -1,6 +1,7 @@
 package com.music.demo.Controller;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.music.demo.DTO.SongDTO;
 import com.music.demo.Entites.Song;
 import com.music.demo.Entites.User;
 import com.music.demo.Service.PublicService;
@@ -24,10 +26,42 @@ import lombok.RequiredArgsConstructor;
 public class PublicController {
     private final PublicService service;
 
-    @GetMapping("/songs")
-    public List<Song> songs(){
-        return service.allSongs();
+    /*@GetMapping("/songs")
+    public ResponseEntity<List<SongDTO>> songs() {
+        System.out.println("Hello");
+        List<Song> songs = service.allSongs();
+
+        if (songs.isEmpty()) {
+            return ResponseEntity.noContent().build();  // Return 204 No Content if the list is empty
+        }
+
+        List<SongDTO> resSongs = new ArrayList<SongDTO>();
+        for(Song song : songs){
+            SongDTO dto = new SongDTO(song);
+            resSongs.add(dto);
+        }
+        
+        return ResponseEntity.ok(resSongs);  // Return 200 OK with the list of songs
+    }*/
+
+    @GetMapping("/song")
+    public ResponseEntity<SongDTO> specificSong(@RequestParam(required = false) Long id,
+                                                @RequestParam(required = false) String title,
+                                                @RequestParam(required = false) String artist) {
+        //System.out.println("World");
+
+        List<Song> songs = service.findSpecifically(id,title,artist);
+        
+        if (songs.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        SongDTO songDTO = new SongDTO(songs.get(0));
+        return ResponseEntity.ok(songDTO);
     }
+
+
+
     @PostMapping("/new_song")
     public ResponseEntity<Object> newSong(@RequestBody Song song ){
         if(!service.existsByTitleAndArtist(song)){

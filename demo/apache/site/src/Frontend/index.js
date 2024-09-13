@@ -32,6 +32,24 @@ let test = {
     "tags": ["help"]
 };
 
+function createPrompt(songLyrics, searchWords) {
+    return `
+    You are a music analysis AI. Find and highlight words in the lyrics: "${searchWords}".
+    Lyrics: ${songLyrics}
+    `;
+}
+async function sendToLlama(prompt) {
+    const response = await fetch('https://ollama-api-url', {  // Change to the real one
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: prompt })
+    });
+    const data = await response.json();
+    return data.result;
+}
+
 
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!

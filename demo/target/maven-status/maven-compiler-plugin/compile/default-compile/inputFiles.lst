@@ -1,5 +1,7 @@
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Configs\FakerConfig.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Controller\PublicController.java
+C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\DTO\SongDTO.java
+C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Entites\Lyrics.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Entites\Song.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Entites\User.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Faking\DataInitializer.java
@@ -7,3 +9,4 @@ C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\dem
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Repositories\SongRepository.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Repositories\UserRepository.java
 C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Service\PublicService.java
+C:\Users\ACER\Desktop\Insurance\nanocats-peddie\demo\src\main\java\com\music\demo\Service\SongSpecifications.java
