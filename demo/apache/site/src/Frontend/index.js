@@ -70,8 +70,33 @@ function getSong(input) {
 }
 var test = {
     "sessionID": "killme",
-    "tags": ["BTS"]
+    "tags": ["erm"]
 };
+function createPrompt(songLyrics, searchWords) {
+    return "\n    You are a music analysis AI. Find and highlight words in the lyrics: \"".concat(searchWords, "\".\n    Lyrics: ").concat(songLyrics, "\n    ");
+}
+function sendToLlama(prompt) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetch('https://ollama-api-url', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt: prompt })
+                    })];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    return [2 /*return*/, data.result];
+            }
+        });
+    });
+}
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
 var currentState = "home";
