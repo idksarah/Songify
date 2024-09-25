@@ -1,17 +1,15 @@
 version: '3.8'
-services:
 
+services:
   app:
     build: .
-    #networks:
-    #  - internal_network
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://music.c1i8k6kqwojb.eu-west-2.rds.amazonaws.com:5432/initial_db?sslmode=require
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 29032006
       SERVER_PORT: 8082
     ports:
-      - "8082:8082"  # Map the container's port 8082 to the host's port 8082
+      - "8082:8082"
 
   webapp:
     build: ./python
@@ -25,25 +23,19 @@ services:
     ports:
       - "80:80"
       - "443:443"
+
   ollama:
     image: ollama/ollama
     volumes:
       - ollama:/root/.ollama
     ports:
       - "11434:11434"
-    #command: ["run", "llama2"]  # Command to automatically pull and run Llama 2
     environment:
       - MODEL=llama2
 
 volumes:
-    ollama:
+  ollama:
 
-  #webserver:
-  #  build: ./apache
-  #  ports:
-  #    - "80:80"
-  #    - "443:443"
-
-#networks:
- # internal_network:
-  #  internal: true
+# networks:
+#   internal_network:
+#     internal: true
