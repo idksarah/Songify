@@ -1,3 +1,5 @@
+let lyrics:boolean = false;
+
 async function getSong(input) {
     let url = `http://127.0.0.1:8000/api/find-songs`;
     console.log(url);
@@ -19,15 +21,13 @@ async function getSong(input) {
 }
 
 let test = {
-    "sessionID": "killme",
-    "tags": ["erm"]
+    "tags": ["Drake"]
 };
 
 
-function createPrompt(songLyrics, searchWords) {  //maria
+function createPrompt(songLyrics) {  //maria
     return `
-    You are a music analysis AI. Find and highlight words in the lyrics: "${searchWords}".
-    Lyrics: ${songLyrics}
+    You are a music analysis AI. Recommend a song based on these lyrics:${songLyrics}
     `;
 }
 async function sendToLlama(prompt) { //maria
@@ -41,7 +41,6 @@ async function sendToLlama(prompt) { //maria
     const data = await response.json();
     return data.result;
 }
-
 
 //god im rlly sorry for the js ur about to see......
 //like i'm genuinely so sorry i SQEAR ill break this up. later. lol!
@@ -70,29 +69,7 @@ const testSong = {
     I don't believe that anybody feels the way I do about you now
     And all the roads we have to walk are winding
     And all the lights that lead us there are blinding
-    There are many things that I would like to say to you, but I don't know how
-    Because maybe
-    You're gonna be the one that saves me
-    And after all
-    You're my wonderwall
-    Today was gonna be the day, but they'll never throw it back to you
-    And by now, you should've somehow realised what you're not to do
-    I don't believe that anybody feels the way I do about you now
-    And all the roads that lead you there were winding
-    And all the lights that light the way are blinding
-    There are many things that I would like to say to you, but I don't know how
-    I said maybe
-    You're gonna be the one that saves me
-    And after all
-    You're my wonderwall
-    I said maybe (I said maybe)
-    You're gonna be the one that saves me
-    And after all
-    You're my wonderwall
-    I said maybe (I said maybe)
-    You're gonna be the one that saves me (saves me)
-    You're gonna be the one that saves me (saves me)
-    You're gonna be the one that saves me (saves me)`,
+    There are many things that I would like to say to you, but I don't know`,
     coverUrl: "https://images.genius.com/2870a86cff5f609f220b3d84cd269248.300x300x1.jpg"
 };
 
@@ -161,29 +138,16 @@ const recTitle = document.querySelector(".recTitle");
 const recArtist = document.querySelector(".recTitle");
 
 function displaySongRec(song){
-    alert("??????");
+    lyrics = true;
+    lyricContent.classList.add("hidden");
     console.log(song);
-    recContent.innerHTML = '';
-    streamingContainer.innerHTML = '';
-    
-    recContent.classList.remove("hidden"); //why can't it remove classes?
+    lyricContent.innerHTML = '';
+    //streamingContainer.innerHTML = '';
 
     streamingContainer.classList.add("streamingContainer");
-    recContainer.appendChild(streamingContainer);
+    recContent.appendChild(streamingContainer);
 
     recContent.appendChild(topContainer);
-
-    if(!appIcons){
-        appIcons = true;
-        const spotify = document.createElement("img");
-        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
-        spotify.classList.add("spotify", "icon");
-        streamingContainer.appendChild(spotify);
-
-        spotify.addEventListener("click", () => {
-            window.open(spotifyLink.toString(), "_blank");
-        });
-    }
 
     DOMsongCover.classList.add("songCover");
     DOMsongCover.src = song.coverUrl;
@@ -196,32 +160,42 @@ function displaySongRec(song){
     DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
+
+    if(!appIcons){
+        appIcons = true;
+        const spotify = document.createElement("img");
+        spotify.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png";
+        spotify.classList.add("spotify", "icon");
+        streamingContainer.appendChild(spotify);
+
+        spotify.addEventListener("click", () => {
+            window.open(spotifyLink.toString(), "_blank");
+        });
+    }
 }
 
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");
-const recRightContainer = document.createElement("div");
-const recTopContainer = document.createElement("div");
+const recRightContainer = document.querySelector<HTMLDivElement>(".recRightContainer");
+const topRecContent = document.querySelector<HTMLDivElement>(".topRecContent");
 let DOMlyrics = document.createElement("p");
 
 const lyricTopContainer = document.querySelector<HTMLDivElement>(".lyricTopContainer");
 const lyricBottomContainer = document.querySelector<HTMLDivElement>(".lyricBottomContainer");
 
 function displaySongLyrics(){
-    lyricContent.classList.remove("hidden");
-    lyricContent.appendChild(recContainer);
+    if(!lyrics){
+        lyricContent.classList.remove("hidden");
+    }
 
     DOMlyrics.textContent = testSong.lyrics;
     DOMlyrics.classList.add("text", "lyrics");
     lyricContent.appendChild(DOMlyrics);
 
-    recTopContainer.classList.add(".recTopContainer");
-    recContainer.appendChild(recTopContainer)
+    topRecContent.classList.add(".topRecContent");
+    recContent.appendChild(topRecContent)
 
     DOMsongCover.classList.add("songCover");
-    recTopContainer.appendChild(DOMsongCover);
-
-    recRightContainer.classList.add(".recRightContainer");
-    recTopContainer.appendChild(recRightContainer)
+    topRecContent.appendChild(DOMsongCover);
 
     DOMsong.classList.add("text", "song");
     recRightContainer.appendChild(DOMsong);
@@ -248,9 +222,10 @@ function checkIfUserInputText(){
                 if(highlightText.length > 100){
                     alert("Please choose lyrics under 100 characters!");
                 } else {
+                    console.log("reccing");
                     console.log(highlightText);
-                    lyricContent.classList.add("idkwhyhiddendoesntworkbutthisdoesso");
-                    recContainer.classList.remove("hidden");
+                    lyricContent.classList.add("hidden");
+                    recContent.classList.remove("hidden");
                     displaySongRec(testRec);
                 }
             }

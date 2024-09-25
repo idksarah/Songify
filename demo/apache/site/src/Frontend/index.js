@@ -34,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var lyrics = false;
 function getSong(input) {
     return __awaiter(this, void 0, void 0, function () {
         var url, response, data, error_1;
@@ -69,11 +70,10 @@ function getSong(input) {
     });
 }
 var test = {
-    "sessionID": "killme",
-    "tags": ["erm"]
+    "tags": ["Drake"]
 };
-function createPrompt(songLyrics, searchWords) {
-    return "\n    You are a music analysis AI. Find and highlight words in the lyrics: \"".concat(searchWords, "\".\n    Lyrics: ").concat(songLyrics, "\n    ");
+function createPrompt(songLyrics) {
+    return "\n    You are a music analysis AI. Recommend a song based on these lyrics:".concat(songLyrics, "\n    ");
 }
 function sendToLlama(prompt) {
     return __awaiter(this, void 0, void 0, function () {
@@ -112,7 +112,7 @@ var appIcons = false;
 var testSong = {
     title: "Wonderwall",
     artist: "Oasis",
-    lyrics: "Today is gonna be the day that they're gonna throw it back to you\n    And by now, you should've somehow realised what you gotta do\n    I don't believe that anybody feels the way I do about you now\n    And backbeat, the word is on the street that the fire in your heart is out\n    I'm sure you've heard it all before, but you never really had a doubt\n    I don't believe that anybody feels the way I do about you now\n    And all the roads we have to walk are winding\n    And all the lights that lead us there are blinding\n    There are many things that I would like to say to you, but I don't know how\n    Because maybe\n    You're gonna be the one that saves me\n    And after all\n    You're my wonderwall\n    Today was gonna be the day, but they'll never throw it back to you\n    And by now, you should've somehow realised what you're not to do\n    I don't believe that anybody feels the way I do about you now\n    And all the roads that lead you there were winding\n    And all the lights that light the way are blinding\n    There are many things that I would like to say to you, but I don't know how\n    I said maybe\n    You're gonna be the one that saves me\n    And after all\n    You're my wonderwall\n    I said maybe (I said maybe)\n    You're gonna be the one that saves me\n    And after all\n    You're my wonderwall\n    I said maybe (I said maybe)\n    You're gonna be the one that saves me (saves me)\n    You're gonna be the one that saves me (saves me)\n    You're gonna be the one that saves me (saves me)",
+    lyrics: "Today is gonna be the day that they're gonna throw it back to you\n    And by now, you should've somehow realised what you gotta do\n    I don't believe that anybody feels the way I do about you now\n    And backbeat, the word is on the street that the fire in your heart is out\n    I'm sure you've heard it all before, but you never really had a doubt\n    I don't believe that anybody feels the way I do about you now\n    And all the roads we have to walk are winding\n    And all the lights that lead us there are blinding\n    There are many things that I would like to say to you, but I don't know",
     coverUrl: "https://images.genius.com/2870a86cff5f609f220b3d84cd269248.300x300x1.jpg"
 };
 var testRec = {
@@ -171,14 +171,23 @@ var recImage = document.querySelector(".recImage");
 var recTitle = document.querySelector(".recTitle");
 var recArtist = document.querySelector(".recTitle");
 function displaySongRec(song) {
-    alert("??????");
+    lyrics = true;
+    lyricContent.classList.add("hidden");
     console.log(song);
-    recContent.innerHTML = '';
-    streamingContainer.innerHTML = '';
-    recContent.classList.remove("hidden"); //why can't it remove classes?
+    lyricContent.innerHTML = '';
+    //streamingContainer.innerHTML = '';
     streamingContainer.classList.add("streamingContainer");
-    recContainer.appendChild(streamingContainer);
+    recContent.appendChild(streamingContainer);
     recContent.appendChild(topContainer);
+    DOMsongCover.classList.add("songCover");
+    DOMsongCover.src = song.coverUrl;
+    topContainer.appendChild(DOMsongCover);
+    DOMsong.classList.add("text", "song");
+    DOMsong.textContent = song.title;
+    topContainer.appendChild(DOMsong);
+    DOMsongArtist.classList.add("text", "songArtist");
+    DOMsongArtist.textContent = song.artist;
+    topContainer.appendChild(DOMsongArtist);
     if (!appIcons) {
         appIcons = true;
         var spotify = document.createElement("img");
@@ -189,34 +198,24 @@ function displaySongRec(song) {
             window.open(spotifyLink.toString(), "_blank");
         });
     }
-    DOMsongCover.classList.add("songCover");
-    DOMsongCover.src = song.coverUrl;
-    topContainer.appendChild(DOMsongCover);
-    DOMsong.classList.add("text", "song");
-    DOMsong.textContent = song.title;
-    topContainer.appendChild(DOMsong);
-    DOMsongArtist.classList.add("text", "songArtist");
-    DOMsongArtist.textContent = song.artist;
-    topContainer.appendChild(DOMsongArtist);
 }
 var lyricContent = document.querySelector(".lyricContent");
-var recRightContainer = document.createElement("div");
-var recTopContainer = document.createElement("div");
+var recRightContainer = document.querySelector(".recRightContainer");
+var topRecContent = document.querySelector(".topRecContent");
 var DOMlyrics = document.createElement("p");
 var lyricTopContainer = document.querySelector(".lyricTopContainer");
 var lyricBottomContainer = document.querySelector(".lyricBottomContainer");
 function displaySongLyrics() {
-    lyricContent.classList.remove("hidden");
-    lyricContent.appendChild(recContainer);
+    if (!lyrics) {
+        lyricContent.classList.remove("hidden");
+    }
     DOMlyrics.textContent = testSong.lyrics;
     DOMlyrics.classList.add("text", "lyrics");
     lyricContent.appendChild(DOMlyrics);
-    recTopContainer.classList.add(".recTopContainer");
-    recContainer.appendChild(recTopContainer);
+    topRecContent.classList.add(".topRecContent");
+    recContent.appendChild(topRecContent);
     DOMsongCover.classList.add("songCover");
-    recTopContainer.appendChild(DOMsongCover);
-    recRightContainer.classList.add(".recRightContainer");
-    recTopContainer.appendChild(recRightContainer);
+    topRecContent.appendChild(DOMsongCover);
     DOMsong.classList.add("text", "song");
     recRightContainer.appendChild(DOMsong);
     DOMsongArtist.classList.add("text", "songArtist");
@@ -239,9 +238,10 @@ function checkIfUserInputText() {
                     alert("Please choose lyrics under 100 characters!");
                 }
                 else {
+                    console.log("reccing");
                     console.log(highlightText);
-                    lyricContent.classList.add("idkwhyhiddendoesntworkbutthisdoesso");
-                    recContainer.classList.remove("hidden");
+                    lyricContent.classList.add("hidden");
+                    recContent.classList.remove("hidden");
                     displaySongRec(testRec);
                 }
             }
