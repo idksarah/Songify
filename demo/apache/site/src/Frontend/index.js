@@ -160,11 +160,17 @@ var recContent = document.querySelector(".recContent");
 var song, songArtist, songCover, songLyrics;
 var songInfo;
 var streamingContainer = document.createElement("div");
+streamingContainer.classList.add("streamingContainer");
 var home = document.createElement("img");
 var tryAgain = document.createElement("button");
 var DOMsongCover = document.createElement("img");
+DOMsongCover.classList.add("songCover");
 var DOMsong = document.createElement("p");
+DOMsong.classList.add("text", "song", "DOMsong");
 var DOMsongArtist = document.createElement("p");
+DOMsongArtist.classList.add("text", "songArtist");
+var DOMlyrics = document.createElement("p");
+DOMlyrics.classList.add("text", "lyrics");
 var spotifyLink = document.createElement("a");
 var topContainer = document.querySelector(".topContainer");
 var recImage = document.querySelector(".recImage");
@@ -173,19 +179,14 @@ var recArtist = document.querySelector(".recTitle");
 function displaySongRec(song) {
     lyrics = true;
     lyricContent.classList.add("hidden");
-    console.log(song);
     lyricContent.innerHTML = '';
     //streamingContainer.innerHTML = '';
-    streamingContainer.classList.add("streamingContainer");
     recContent.appendChild(streamingContainer);
     recContent.appendChild(topContainer);
-    DOMsongCover.classList.add("songCover");
     DOMsongCover.src = song.coverUrl;
     topContainer.appendChild(DOMsongCover);
-    DOMsong.classList.add("text", "song");
     DOMsong.textContent = song.title;
     topContainer.appendChild(DOMsong);
-    DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
     if (!appIcons) {
@@ -202,24 +203,21 @@ function displaySongRec(song) {
 var lyricContent = document.querySelector(".lyricContent");
 var recRightContainer = document.querySelector(".recRightContainer");
 var topRecContent = document.querySelector(".topRecContent");
-var DOMlyrics = document.createElement("p");
 var lyricTopContainer = document.querySelector(".lyricTopContainer");
 var lyricBottomContainer = document.querySelector(".lyricBottomContainer");
-function displaySongLyrics() {
+function displaySongLyrics(song) {
+    song = testSong; //this is where u should be querying tali's thing btw
     if (!lyrics) {
         lyricContent.classList.remove("hidden");
+        DOMsong.textContent = song.title;
+        lyricContent.appendChild(DOMsong);
+        DOMsongCover.src = song.coverUrl;
+        lyricContent.appendChild(DOMsongCover);
+        DOMsongArtist.textContent = song.artist;
+        lyricContent.appendChild(DOMsongArtist);
     }
-    DOMlyrics.textContent = testSong.lyrics;
-    DOMlyrics.classList.add("text", "lyrics");
+    DOMlyrics.textContent = song.lyrics;
     lyricContent.appendChild(DOMlyrics);
-    topRecContent.classList.add(".topRecContent");
-    recContent.appendChild(topRecContent);
-    DOMsongCover.classList.add("songCover");
-    topRecContent.appendChild(DOMsongCover);
-    DOMsong.classList.add("text", "song");
-    recRightContainer.appendChild(DOMsong);
-    DOMsongArtist.classList.add("text", "songArtist");
-    recRightContainer.appendChild(DOMsongArtist);
 }
 function checkIfUserInputText() {
     if (songName != undefined && songName != "" && songName != originalText) {
@@ -230,7 +228,7 @@ function checkIfUserInputText() {
         //spotifyLink.target = "_blank";
         title.classList.add("hidden");
         input.classList.add("hidden");
-        displaySongLyrics();
+        displaySongLyrics(input.value);
         function runOnLyricContent() {
             var highlightText = getSelectedText();
             if (highlightText != "") {

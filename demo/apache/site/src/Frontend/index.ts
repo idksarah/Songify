@@ -125,11 +125,23 @@ let song:String, songArtist:String, songCover:HTMLImageElement, songLyrics:Strin
 let songInfo;
 
 const streamingContainer = document.createElement("div");
+streamingContainer.classList.add("streamingContainer");
+
 const home = document.createElement("img");
 const tryAgain = document.createElement("button");
+
 const DOMsongCover = document.createElement("img");
+DOMsongCover.classList.add("songCover");
+
 const DOMsong = document.createElement("p");
+DOMsong.classList.add("text", "song", "DOMsong");
+
 const DOMsongArtist = document.createElement("p");
+DOMsongArtist.classList.add("text", "songArtist");
+
+let DOMlyrics = document.createElement("p");
+DOMlyrics.classList.add("text", "lyrics");
+
 const spotifyLink = document.createElement("a");
 
 const topContainer = document.querySelector(".topContainer");
@@ -140,24 +152,19 @@ const recArtist = document.querySelector(".recTitle");
 function displaySongRec(song){
     lyrics = true;
     lyricContent.classList.add("hidden");
-    console.log(song);
     lyricContent.innerHTML = '';
     //streamingContainer.innerHTML = '';
 
-    streamingContainer.classList.add("streamingContainer");
     recContent.appendChild(streamingContainer);
 
     recContent.appendChild(topContainer);
 
-    DOMsongCover.classList.add("songCover");
     DOMsongCover.src = song.coverUrl;
     topContainer.appendChild(DOMsongCover);
 
-    DOMsong.classList.add("text", "song");
     DOMsong.textContent = song.title;
     topContainer.appendChild(DOMsong);
 
-    DOMsongArtist.classList.add("text", "songArtist");
     DOMsongArtist.textContent = song.artist;
     topContainer.appendChild(DOMsongArtist);
 
@@ -177,31 +184,26 @@ function displaySongRec(song){
 const lyricContent = document.querySelector<HTMLDivElement>(".lyricContent");
 const recRightContainer = document.querySelector<HTMLDivElement>(".recRightContainer");
 const topRecContent = document.querySelector<HTMLDivElement>(".topRecContent");
-let DOMlyrics = document.createElement("p");
 
 const lyricTopContainer = document.querySelector<HTMLDivElement>(".lyricTopContainer");
 const lyricBottomContainer = document.querySelector<HTMLDivElement>(".lyricBottomContainer");
 
-function displaySongLyrics(){
+function displaySongLyrics(song){
+    song=testSong; //this is where u should be querying tali's thing btw
     if(!lyrics){
         lyricContent.classList.remove("hidden");
-    }
 
-    DOMlyrics.textContent = testSong.lyrics;
-    DOMlyrics.classList.add("text", "lyrics");
+    DOMsong.textContent = song.title;
+    lyricContent.appendChild(DOMsong);
+
+    DOMsongCover.src = song.coverUrl;
+    lyricContent.appendChild(DOMsongCover);
+
+    DOMsongArtist.textContent = song.artist;
+    lyricContent.appendChild(DOMsongArtist);   
+}
+    DOMlyrics.textContent = song.lyrics;
     lyricContent.appendChild(DOMlyrics);
-
-    topRecContent.classList.add(".topRecContent");
-    recContent.appendChild(topRecContent)
-
-    DOMsongCover.classList.add("songCover");
-    topRecContent.appendChild(DOMsongCover);
-
-    DOMsong.classList.add("text", "song");
-    recRightContainer.appendChild(DOMsong);
-
-    DOMsongArtist.classList.add("text", "songArtist");
-    recRightContainer.appendChild(DOMsongArtist);
 }
 
 function checkIfUserInputText(){
@@ -215,7 +217,7 @@ function checkIfUserInputText(){
         title.classList.add("hidden");
         input.classList.add("hidden");
 
-        displaySongLyrics();
+        displaySongLyrics(input.value);
         function runOnLyricContent() {
             let highlightText = getSelectedText();
             if(highlightText != ""){
