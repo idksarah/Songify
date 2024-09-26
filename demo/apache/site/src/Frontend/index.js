@@ -72,8 +72,8 @@ function getSong(input) {
 var test = {
     "tags": ["Drake"]
 };
-function createPrompt(songLyrics) {
-    return "\n    You are a music analysis AI. Recommend a song based on these lyrics:".concat(songLyrics, "\n    ");
+function getPrompt(songLyrics, song) {
+    return "\n    Recommend a song similar to ".concat(song, " if these are my favorite lyrics: ").concat(songLyrics, " \n    ");
 }
 function sendToLlama(prompt) {
     return __awaiter(this, void 0, void 0, function () {
@@ -163,32 +163,22 @@ var streamingContainer = document.createElement("div");
 streamingContainer.classList.add("streamingContainer");
 var home = document.createElement("img");
 var tryAgain = document.createElement("button");
-var DOMsongCover = document.createElement("img");
-DOMsongCover.classList.add("songCover");
-var DOMsong = document.createElement("p");
-DOMsong.classList.add("text", "song", "DOMsong");
-var DOMsongArtist = document.createElement("p");
-DOMsongArtist.classList.add("text", "songArtist");
-var DOMlyrics = document.createElement("p");
-DOMlyrics.classList.add("text", "lyrics");
 var spotifyLink = document.createElement("a");
-var topContainer = document.querySelector(".topContainer");
-var recImage = document.querySelector(".recImage");
-var recTitle = document.querySelector(".recTitle");
-var recArtist = document.querySelector(".recTitle");
+var recCover = document.querySelector(".recCover");
+var recSong = document.querySelector(".recSong");
+var recArtist = document.querySelector(".recArtist");
 function displaySongRec(song) {
+    song = testRec; //this is where u put the ollmam rec
+    console.log(song);
     lyrics = true;
     lyricContent.classList.add("hidden");
-    lyricContent.innerHTML = '';
-    //streamingContainer.innerHTML = '';
-    recContent.appendChild(streamingContainer);
-    recContent.appendChild(topContainer);
-    DOMsongCover.src = song.coverUrl;
-    topContainer.appendChild(DOMsongCover);
-    DOMsong.textContent = song.title;
-    topContainer.appendChild(DOMsong);
-    DOMsongArtist.textContent = song.artist;
-    topContainer.appendChild(DOMsongArtist);
+    //recContent.appendChild(streamingContainer); add back if u can grab the spotify links
+    recCover.src = song.coverUrl;
+    console.log(recCover.src);
+    recSong.textContent = song.title;
+    console.log(recSong.textContent);
+    recArtist.textContent = song.artist;
+    console.log(recArtist.textContent);
     if (!appIcons) {
         appIcons = true;
         var spotify = document.createElement("img");
@@ -201,29 +191,26 @@ function displaySongRec(song) {
     }
 }
 var lyricContent = document.querySelector(".lyricContent");
-var recRightContainer = document.querySelector(".recRightContainer");
+var lyricRightContainer = document.querySelector(".lyricRightContainer");
 var topRecContent = document.querySelector(".topRecContent");
 var lyricTopContainer = document.querySelector(".lyricTopContainer");
 var lyricBottomContainer = document.querySelector(".lyricBottomContainer");
+var lyricCover = document.querySelector(".lyricCover");
+var lyricSong = document.querySelector(".lyricSong");
+var lyricArtist = document.querySelector(".lyricArtist");
+var lyricLyrics = document.querySelector(".lyricLyrics");
 function displaySongLyrics(song) {
     song = testSong; //this is where u should be querying tali's thing btw
     if (!lyrics) {
         lyricContent.classList.remove("hidden");
-        DOMsong.textContent = song.title;
-        lyricContent.appendChild(DOMsong);
-        DOMsongCover.src = song.coverUrl;
-        lyricContent.appendChild(DOMsongCover);
-        DOMsongArtist.textContent = song.artist;
-        lyricContent.appendChild(DOMsongArtist);
+        lyricSong.textContent = song.title;
+        lyricCover.src = song.coverUrl;
+        lyricArtist.textContent = song.artist;
     }
-    DOMlyrics.textContent = song.lyrics;
-    lyricContent.appendChild(DOMlyrics);
+    lyricLyrics.textContent = song.lyrics;
 }
 function checkIfUserInputText() {
     if (songName != undefined && songName != "" && songName != originalText) {
-        DOMsong.textContent = testSong.title;
-        DOMsongCover.src = testSong.coverUrl;
-        DOMsongArtist.textContent = testSong.artist;
         //spotifyLink.href = testSong.songUrl; would be vry good to have a spotify link but whatev
         //spotifyLink.target = "_blank";
         title.classList.add("hidden");

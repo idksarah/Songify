@@ -151,7 +151,6 @@ html, body, content, .lyricContent, .recContent {
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    width: 75vw;
     margin-bottom: 50px;
 }
 
@@ -191,4 +190,9 @@ html, body, content, .lyricContent, .recContent {
 .hidden{
     display: none;
     visibility: hidden;
+}
+
+.recCover {
+    height: 20em;
+    width: 20em;
 }
